@@ -14,15 +14,14 @@ def main():
     matrix = initMatrix(TEST_DATA)
     print('INIT MATRIX')
     print(matrix)
+    # Inicializar CLI
     # Por ahora solo avanza 3 generaciones, para pruebas.
     for i in range(0, 4):
         matrix = nextGeneration(matrix)
         print()
         print('NEXT GENERATION MATRIX: ' + str(i + 1))
         print(matrix)
-    # Inicializar CLI
-    # WHILE: Procesar generaciones (retorna un nuevo array)
-    #   Actualizo pantalla por cada generacion procesada
+        #   Actualizo pantalla por cada generacion procesada
 
 
 # Método que se encarga de inicializar la matriz con los limites y los datos iniciales
@@ -37,6 +36,7 @@ def initMatrix(initConfig):
 
 # Método que se encarga de agregar las celulas vivas a partir de los datos iniciales
 def fillMatrix(matrix, config):
+    # Recorrer la configuracion y obtener las posiciones para asignarla a la matriz (sumandole 1 por la fila y columna)
     for indexRow, row in enumerate(matrix):
         for indexColumn in range(len(row)):
             if (indexRow, indexColumn) in config:
@@ -45,6 +45,8 @@ def fillMatrix(matrix, config):
 # Método que se encarga de llenar todos los límites de la matriz
 # Esta funcion de puede abreviar pero por legibilidad por ahora lo dejamos así
 def fillLimits(matrix):
+    # Cambiar este for, llenando solamente las filas y columnas extras.
+    # Se puede hacer como: for i in range(25); matriz[0][i] = "*";
     for indexRow, row in enumerate(matrix):
         for indexColumn in range(len(row)):
             if indexRow == 0 and (0 <= indexColumn <= MAX_WIDHT + 1):
@@ -66,8 +68,8 @@ def nextGeneration(matrix):
     for indexRow, row in enumerate(matrix):
         for indexColumn in range(len(row)):
             position = (indexRow, indexColumn)
-            neighbords = findNeighbors(position)
             if matrix[position[0]][position[1]] != LIMIT_CHARACTER:
+                neighbords = findNeighbors(position)
                 liveCellCount = getLivingCells(matrix, neighbords)
                 updateCellState(nextGenerationMatrix, position, liveCellCount)
     return nextGenerationMatrix
@@ -75,6 +77,7 @@ def nextGeneration(matrix):
 # Obtiene todas las posiciones vecinas de cualquier direccion de la matriz.
 # Ej: si estamos en la posicion (3,3) va a retornar [(2,2), (3,2), (4,2), (2,3), (4,3), (2,4), (3,4), (4,4)]
 def findNeighbors(position):
+    [for x in list]
     neighbords = [tuple(map(sum, zip(nei, position))) for nei in NEIGHBORS]
     return neighbords
 
