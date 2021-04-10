@@ -3,7 +3,7 @@ from copy import copy, deepcopy
 MAX_HEIGHT, MAX_WIDHT = 5, 4
 # Oscillator - Blinker
 # Las configuraciones deben empezar de las coordenadas (1,1)
-TEST_DATA = [(2, 2), (3, 2), (4, 2)]
+TEST_DATA = [(1, 1), (2, 1), (3, 1)]
 ALIVE_CHARACTER = 'X'
 DEAD_CHARACTER = ' '
 LIMIT_CHARACTER = '*'
@@ -36,31 +36,27 @@ def initMatrix(initConfig):
 
 # Método que se encarga de agregar las celulas vivas a partir de los datos iniciales
 def fillMatrix(matrix, config):
-    # Recorrer la configuracion y obtener las posiciones para asignarla a la matriz (sumandole 1 por la fila y columna)
-    for indexRow, row in enumerate(matrix):
-        for indexColumn in range(len(row)):
-            if (indexRow, indexColumn) in config:
-                matrix[indexRow][indexColumn] = ALIVE_CHARACTER
+    for aliveCell in config:
+        (rowAliveCell, columnAliveCell) = aliveCell
+        matrix[rowAliveCell + 1][ columnAliveCell + 1] = ALIVE_CHARACTER
 
 # Método que se encarga de llenar todos los límites de la matriz
-# Esta funcion de puede abreviar pero por legibilidad por ahora lo dejamos así
 def fillLimits(matrix):
-    # Cambiar este for, llenando solamente las filas y columnas extras.
-    # Se puede hacer como: for i in range(25); matriz[0][i] = "*";
-    for indexRow, row in enumerate(matrix):
-        for indexColumn in range(len(row)):
-            if indexRow == 0 and (0 <= indexColumn <= MAX_WIDHT + 1):
-                # Ingresa los limites de la primer fila
-                matrix[indexRow][indexColumn] = LIMIT_CHARACTER
-            elif indexRow == MAX_HEIGHT + 1 and (0 <= indexColumn <= MAX_WIDHT + 1):
-                # Ingresa los limites de la última fila
-                matrix[indexRow][indexColumn] = LIMIT_CHARACTER
-            elif indexColumn == 0 and (0 <= indexRow <= MAX_HEIGHT + 1):
-                # Ingresa los limites de la primer columna
-                matrix[indexRow][indexColumn] = LIMIT_CHARACTER
-            elif indexColumn == MAX_WIDHT + 1 and (0 <= indexRow <= MAX_HEIGHT + 1):
-                # Ingresa los limites de la ultima columna
-                matrix[indexRow][indexColumn] = LIMIT_CHARACTER
+    # Ingresa los limites de la primer fila
+    for i in range(MAX_WIDHT + 2):
+        matrix[0][i] = LIMIT_CHARACTER
+
+    # Ingresa los limites de la última fila
+    for i in range(MAX_WIDHT + 2):
+        matrix[MAX_HEIGHT + 1][i] = LIMIT_CHARACTER
+
+    # Ingresa los limites de la primer columna
+    for i in range(MAX_HEIGHT + 2):
+        matrix[i][0] = LIMIT_CHARACTER
+
+    # Ingresa los limites de la ultima columna
+    for i in range(MAX_HEIGHT + 2):
+        matrix[i][MAX_WIDHT + 1] = LIMIT_CHARACTER 
 
 # Se encarga de procesar la siguiente generación. Hace una copia de la matriz actual, para poder reemplazar los datos
 def nextGeneration(matrix):
@@ -77,7 +73,6 @@ def nextGeneration(matrix):
 # Obtiene todas las posiciones vecinas de cualquier direccion de la matriz.
 # Ej: si estamos en la posicion (3,3) va a retornar [(2,2), (3,2), (4,2), (2,3), (4,3), (2,4), (3,4), (4,4)]
 def findNeighbors(position):
-    [for x in list]
     neighbords = [tuple(map(sum, zip(nei, position))) for nei in NEIGHBORS]
     return neighbords
 
