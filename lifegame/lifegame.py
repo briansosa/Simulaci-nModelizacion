@@ -1,28 +1,39 @@
+import time
+import sys
 from copy import copy, deepcopy
+from curses import wrapper
 
-MAX_HEIGHT, MAX_WIDHT = 5, 4
-# Oscillator - Blinker
-# Las configuraciones deben empezar de las coordenadas (1,1)
-TEST_DATA = [(1, 1), (2, 1), (3, 1)]
+MAX_HEIGHT, MAX_WIDHT = 25, 25
 ALIVE_CHARACTER = 'X'
 DEAD_CHARACTER = ' '
 LIMIT_CHARACTER = '*'
+SLEEP_SECONDS = 0.25
 NEIGHBORS = [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
+DEFAULT_CONFIG = "blinker.txt"
 
-def main():
-    # Inicializar array
-    matrix = initMatrix(TEST_DATA)
-    print('INIT MATRIX')
-    print(matrix)
-    # Inicializar CLI
-    # Por ahora solo avanza 3 generaciones, para pruebas.
-    for i in range(0, 4):
+def main(stdscr):
+  initTerminal(stdscr)
+
+  fileName = DEFAULT_CONFIG
+
+  if len(sys.argv) >= 2:
+      fileName = sys.argv[1]
+
+  config = readFile(fileName)
+
+  matrix = initMatrix(config)
+  showMatrix(stdscr, matrix)
+
+  nextGenerationFlag = False
+  while True:
+    c = stdscr.getch()
+    if c == ord('q'):
+      break
+    elif c == ord('b') or nextGenerationFlag:
         matrix = nextGeneration(matrix)
-        print()
-        print('NEXT GENERATION MATRIX: ' + str(i + 1))
-        print(matrix)
-        #   Actualizo pantalla por cada generacion procesada
-
+        showMatrix(stdscr, matrix)
+        nextGenerationFlag = True
+        time.sleep(SLEEP_SECONDS)
 
 # Método que se encarga de inicializar la matriz con los limites y los datos iniciales
 def initMatrix(initConfig):
@@ -88,5 +99,24 @@ def getLivingCells(nextGenerationMatrix, neighbords):
     aliveCells = list(filter(lambda x: (nextGenerationMatrix[x[0]][x[1]] == ALIVE_CHARACTER), neighbords))
     return len(aliveCells)
 
+def initTerminal(stdscr):
+  stdscr.nodelay(True)
+  stdscr.clear()
 
-main()
+def showMatrix(stdscr, matrix):
+  for indexRow, row in enumerate(matrix):
+    for indexColumn in range(len(row)):
+      stdscr.addch(indexRow, indexColumn, matrix[indexRow][indexColumn])
+  stdscr.refresh()
+
+def readFile(fileName):
+  with open(fileName) as f:
+      lines = [lineToTuple(line.rstrip()) for line in f]
+  return lines
+
+def lineToTuple(line):
+  splitLine = line.split(',')
+  return (int(splitLine[0]), int(splitLine[1]))
+
+
+wrapper(main)
