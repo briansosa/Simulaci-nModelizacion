@@ -7,6 +7,11 @@ def main():
         fileName = sys.argv[1]
     assembler = Assembler()
     assembler.generateExecutable(fileName)
-    assembler.process()
+
+    if (not assembler.hasError()):
+        system = System(assembler.getExecutable(), Processor())
+        system.process()
+    else:
+        print(assembler.getError())
 
 main()

@@ -4,12 +4,15 @@ from processor import *
 from system import *
 import re
 
-VALID_INSTRUCCION = ['mov', 'add', 'jmp', 'jnz', 'cmp', 'inc', 'dec']
 COMMENT = "#"
+COMPILATION_ERROR = "Error in line {line}: {error}"
+INVALID_LINE = "Invalid line"
+LABEL_NOT_FOUND = "Label '{label}' not found"
+
 
 class Assembler:
     def __init__(self):
-        self.errors = []
+        self.error = ""
         self.executable = Executable()
         self.instructionsToReplace = []
 
@@ -26,50 +29,58 @@ class Assembler:
                 self.executable.addToLookupTable(label, indexInstruction)
             elif self.isInstruction(line):
                 instructionName, parameters = self.parseInstruction(line)
-                instruction = self.generateInstruction(instructionName, parameters)
-                self.executable.addToInstructions(instruction)
-                if isinstance(instruction, Jmp) or isinstance(instruction, Jnz):
-                    self.instructionsToReplace.append(indexInstruction)
+                try:
+                    instruction = self.generateInstruction(instructionName, parameters)
+                    instruction.validateParameters()
+                    self.executable.addToInstructions(instruction)
+                    if isinstance(instruction, Jmp) or isinstance(instruction, Jnz):
+                        self.instructionsToReplace.append((indexInstruction, indexSourceCode))
+                    indexInstruction += 1
+                except Exception as e:
+                    self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = str(e))
+                    break
+            else:
+                self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = INVALID_LINE)
+        if not self.error: 
+            self.executable.setEntryPoint()
+            self.replaceLabelForIndexInstruction()
 
-                indexInstruction += 1
-        self.executable.setEntryPoint()
-        self.replaceLabelForIndexInstruction()
-        # print(self.executable.lookupTable)
-        # print(self.executable.instructions)
-        # print(self.executable.entryPoint)
+    def hasError(self):
+        return self.error != ""
 
-    def process(self):
-        processor = Processor()
-        system = System(self.executable, processor)
-        system.process()
+    def getError(self):
+        return self.error
 
     def replaceLabelForIndexInstruction(self):
-        for indexInstruction in self.instructionsToReplace:
+        for indexInstruction, indexSourceCode in self.instructionsToReplace:
             instruction = self.executable.getInstruction(indexInstruction)
             label = instruction.getParameter()
             if label in self.executable.getLookupTable():
                 lookupIndex = self.executable.getToLookupTable(label)
                 instruction.setParameter(lookupIndex)
-            # si no largar un error.
+            else:
+                self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = LABEL_NOT_FOUND.format(label = label)) 
 
     def generateInstruction(self, instructionName, parameters):
         listParams = self.parseParameters(parameters)
         if len(listParams) == 1:
-            if instructionName == 'jmp':
+            if instructionName == JMP:
                 return Jmp(listParams[0])
-            elif instructionName == 'jnz':
+            elif instructionName == JNZ:
                 return Jnz(listParams[0])
-            elif instructionName == 'inc':
+            elif instructionName == INC:
                 return Inc(listParams[0])
-            elif instructionName == 'dec':
+            elif instructionName == DEC:
                 return Dec(listParams[0])
         elif len(listParams) == 2:
-            if instructionName == 'mov':
+            if instructionName == MOV:
                 return Mov(listParams[0], listParams[1])
-            elif instructionName == 'add':
+            elif instructionName == ADD:
                 return Add(listParams[0], listParams[1])
-            elif instructionName == 'cmp':
+            elif instructionName == CMP:
                 return Cmp(listParams[0], listParams[1])
+        else:
+            raise Exception("Error to generate instruction")
     
     def parseParameters(self, parameters):
         parametersList = []
@@ -83,6 +94,8 @@ class Assembler:
             if twoParamMatch:
                 parametersList.append(twoParamMatch.group(1))
                 parametersList.append(twoParamMatch.group(2))
+            else:
+                raise Exception("Invalid parameters")
 
         return parametersList
 
@@ -109,3 +122,6 @@ class Assembler:
         line = line.replace('\n', '')
         line = line.lower()
         return line    
+
+    def getExecutable(self):
+        return self.executable

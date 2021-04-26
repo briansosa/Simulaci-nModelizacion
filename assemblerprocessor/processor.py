@@ -5,6 +5,8 @@ DX = "dx"
 IP = "ip"
 FLAG = "flag"
 
+ACCESIBLE_REGISTERS = [AX, BX, CX, DX]
+
 class Processor:
     def __init__(self):
         self.ax = 0
