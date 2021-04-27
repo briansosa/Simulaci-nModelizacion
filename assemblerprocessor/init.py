@@ -1,7 +1,12 @@
 import sys
 from assembler import *
+from visualizer import *
+from curses import wrapper
 
-def main():
+HEIGHT = 20
+WIDTH = 4
+
+def main(stdscr):
     fileName = 'counter.asm'
     if len(sys.argv) >= 2:
         fileName = sys.argv[1]
@@ -9,9 +14,17 @@ def main():
     assembler.generateExecutable(fileName)
 
     if (not assembler.hasError()):
-        system = System(assembler.getExecutable(), Processor())
+        executable = assembler.getExecutable()
+        processor = Processor()
+        visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
+        system = System(executable, processor, visualizer)
         system.process()
     else:
         print(assembler.getError())
+    while True:
+      c = stdscr.getch()
+      if c == ord('q'):
+        break
+    
 
-main()
+wrapper(main)
