@@ -1,4 +1,7 @@
+import time
 from processor import *
+
+SLEEP_SECONDS = 3.5
 
 class System:
     def __init__(self, executable, processor, visualizer):
@@ -10,14 +13,13 @@ class System:
         self.processor.setRegister(IP, self.executable.getEntryPoint())
 
         instructions = self.executable.getInstructions()
-        self.visualizer.initWindow(instructions,self.processor.getRegister(IP))
-        # print(self.processor.ip)
-
+        self.visualizer.showWindow(instructions, self.processor)
+        time.sleep(SLEEP_SECONDS)
         while (self.processor.getRegister(IP) < len(instructions)):
             indexInstruction = self.processor.getRegister(IP)
             instruction = instructions[indexInstruction]
             instruction.processInstruction(self.processor)
-            #print(self.processor.showRegisters())
+            self.visualizer.showWindow(instructions, self.processor)
+            time.sleep(SLEEP_SECONDS)
 
-            # Visualizer: UpdatePointer(indexInstruction)
 

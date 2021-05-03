@@ -3,8 +3,8 @@ from assembler import *
 from visualizer import *
 from curses import wrapper
 
-HEIGHT = 20
-WIDTH = 4
+HEIGHT = 10
+WIDTH = 40
 
 def main(stdscr):
     fileName = 'counter.asm'

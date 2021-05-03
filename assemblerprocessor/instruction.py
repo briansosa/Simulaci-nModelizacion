@@ -43,6 +43,9 @@ class Mov(Instruccion):
             processor.setRegister(self.param1, valueRegisterParam2)
         processor.increaseIP()
 
+    def toString(self):
+        return f"mov {self.param1}, {self.param2}"
+
 class Add(Instruccion):
     def __init__(self, param1, param2):
         self.param1 = param1
@@ -63,6 +66,9 @@ class Add(Instruccion):
             sum = valueRegisterParam1 + valueRegisterParam2
         processor.setRegister(self.param1, sum)
         processor.increaseIP()
+
+    def toString(self):
+        return f"add {self.param1}, {self.param2}"
 
 class Cmp(Instruccion):
     def __init__(self, param1, param2):
@@ -90,6 +96,8 @@ class Cmp(Instruccion):
                 processor.setRegister(FLAG, 0)
         processor.increaseIP()
 
+    def toString(self):
+        return f"cmp {self.param1}, {self.param2}"
 
 class Jmp(Instruccion):
     def __init__(self, param):
@@ -106,6 +114,9 @@ class Jmp(Instruccion):
 
     def validateParameters(self):
         pass
+
+    def toString(self):
+        return f"jmp {self.param}"
 
 class Jnz(Instruccion):
     def __init__(self, param):
@@ -126,6 +137,8 @@ class Jnz(Instruccion):
     def validateParameters(self):
         pass
     
+    def toString(self):
+        return f"jnz {self.param}"
 
 class Inc(Instruccion):
     def __init__(self, param):
@@ -140,15 +153,22 @@ class Inc(Instruccion):
         if self.param not in ACCESIBLE_REGISTERS:
             raise Exception(INVALID_PARAMETER.format(self.param))
 
+    def toString(self):
+        return f"inc {self.param}"
+
 class Dec(Instruccion):
     def __init__(self, param):
         self.param = param
 
     def processInstruction(self, processor):
         valueRegister = processor.getRegister(self.param)
-        processor.setRegister(self.param, valueRegister - 1)
+        if valueRegister != 0:
+            processor.setRegister(self.param, valueRegister - 1)
         processor.increaseIP()
 
     def validateParameters(self):
         if self.param not in ACCESIBLE_REGISTERS:
             raise Exception(INVALID_PARAMETER.format(self.param))
+
+    def toString(self):
+        return f"dec {self.param}"

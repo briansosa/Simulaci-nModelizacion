@@ -4,5 +4,5 @@ Entry_point:
 Ciclo:
 	Add ax, cx
 	Inc cx
-	Cmp cx, 10
+	Cmp cx, 3
 	Jnz ciclo
