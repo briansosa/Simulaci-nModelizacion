@@ -6,7 +6,8 @@ from curses import wrapper
 HEIGHT = 10
 WIDTH = 40
 
-def main(stdscr):
+# def main(stdscr):
+def main():
     fileName = 'counter.asm'
     if len(sys.argv) >= 2:
         fileName = sys.argv[1]
@@ -16,15 +17,19 @@ def main(stdscr):
     if (not assembler.hasError()):
         executable = assembler.getExecutable()
         processor = Processor()
-        visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
-        system = System(executable, processor, visualizer)
+        # visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
+        # system = System(executable, processor, visualizer)
+        system = System(executable, processor, "visualizer")
         system.process()
+
+        # Desactivando el visualizador
+        # try:
+            # system.process()
+        # except Exception as e:
+        #     pass
     else:
         print(assembler.getError())
-    while True:
-      c = stdscr.getch()
-      if c == ord('q'):
-        break
     
 
-wrapper(main)
+# wrapper(main)
+main()

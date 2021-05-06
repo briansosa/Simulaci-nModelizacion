@@ -15,18 +15,53 @@ class Assembler:
         self.error = ""
         self.executable = Executable()
         self.instructionsToReplace = []
+        self.listInstructionLibraries = []
+        self.indexInstruction = 0
 
     def generateExecutable(self, filename):
         with open(filename) as file:
-            self.executable.setSourceCode([self.cleanLine(line) for line in file])
+            self.executable.setSourceCode(self.getSourceCodeFromFile(file))
 
-        indexInstruction = 0
-        for indexSourceCode, line in enumerate(self.executable.getSourceCode()):
-            if len(line) == 0 or line[0] == COMMENT:
+        self.generateInstructionLibraries(self.executable.getSourceCode())
+        print(self.listInstructionLibraries)
+        self.processLibraries()
+        self.processSourceCode(self.executable.getSourceCode())
+
+        if not self.error: 
+            self.executable.setEntryPoint()
+            self.replaceLabelForIndexInstruction()
+
+    def generateInstructionLibraries(self, sourceCode):
+        for line in sourceCode:
+            if self.isInclude(line):
+                fileLibrary = self.getIncludeFile(line)
+                with open(fileLibrary) as file:
+                    fileListInstructions = self.getSourceCodeFromFile(file)
+                    self.generateInstructionLibrariesDetails(fileListInstructions, fileLibrary)
+
+    def generateInstructionLibrariesDetails(self, sourceCode, filename):
+        instructionFile = []
+        for line in sourceCode:
+            if self.isInclude(line):
+                fileLibrary = self.getIncludeFile(line)
+                with open(fileLibrary) as file:
+                    fileListInstructions = self.getSourceCodeFromFile(file)
+                    self.generateInstructionLibrariesDetails(fileListInstructions, fileLibrary)
+            else:
+                instructionFile.append(line)
+        self.listInstructionLibraries.append((filename, instructionFile))
+
+    def processLibraries(self):
+        for filename, sourceCode in self.listInstructionLibraries:
+            self.processSourceCode(sourceCode)
+
+    def processSourceCode(self, sourceCode):
+        for indexSourceCode, line in enumerate(sourceCode):
+            if len(line) == 0 or line[0] == COMMENT or self.isInclude(line):
                 continue
             elif self.isLabel(line):
                 label = self.getLabel(line)
-                self.executable.addToLookupTable(label, indexInstruction)
+                self.executable.addToLookupTable(label, self.indexInstruction)
             elif self.isInstruction(line):
                 instructionName, parameters = self.parseInstruction(line)
                 try:
@@ -34,16 +69,13 @@ class Assembler:
                     instruction.validateParameters()
                     self.executable.addToInstructions(instruction)
                     if isinstance(instruction, Jmp) or isinstance(instruction, Jnz):
-                        self.instructionsToReplace.append((indexInstruction, indexSourceCode))
-                    indexInstruction += 1
+                        self.instructionsToReplace.append((self.indexInstruction, indexSourceCode))
+                    self.indexInstruction += 1
                 except Exception as e:
                     self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = str(e))
                     break
             else:
                 self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = INVALID_LINE)
-        if not self.error: 
-            self.executable.setEntryPoint()
-            self.replaceLabelForIndexInstruction()
 
     def hasError(self):
         return self.error != ""
@@ -107,6 +139,14 @@ class Assembler:
         match = re.search('^([\w_]+):$', line)
         return match.group(1)
 
+    def isInclude(self, line):
+        match = re.search('^include\s+([\w]*.asm)$', line)
+        return match
+
+    def getIncludeFile(self, line):
+        match = re.search('^include\s+([\w]*.asm)$', line)
+        return match.group(1)
+
     def isInstruction(self, line):
         match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz)\s+([\w_,\s]+)', line)
         return match and match.group(1) in VALID_INSTRUCCION
@@ -114,7 +154,6 @@ class Assembler:
     def parseInstruction(self, line):
         match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz)\s+([\w_,\s]+)', line)
         return (match.group(1), match.group(2))
-
 
     def cleanLine(self, line):
         line = line.strip()
@@ -125,3 +164,7 @@ class Assembler:
 
     def getExecutable(self):
         return self.executable
+
+    def getSourceCodeFromFile(self, file):
+        listCleanLines = [self.cleanLine(line) for line in file if len(self.cleanLine(line)) != 0 and self.cleanLine(line)[0] != COMMENT]
+        return listCleanLines
