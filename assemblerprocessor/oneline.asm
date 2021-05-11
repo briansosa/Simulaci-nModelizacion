@@ -1,5 +1,3 @@
-include includetest.asm
-
 no_hacenada:
     mov ax, 1
     inc bx

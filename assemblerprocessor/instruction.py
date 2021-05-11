@@ -9,11 +9,15 @@ JNZ = 'jnz'
 CMP = 'cmp'
 INC = 'inc'
 DEC = 'dec'
+PUSH = 'push'
+POP = 'pop'
+CALL = 'call'
+RET = 'ret'
 
 INVALID_PARAMETER = "Parameter: {} is not a valid register"
 INVALID_PARAMETER_OR_NUMERIC = "Parameter: {} is not a valid register or is not a numeric value"
 
-VALID_INSTRUCCION = [MOV, ADD, JMP, JNZ, CMP, INC, DEC]
+VALID_INSTRUCCION = [MOV, ADD, JMP, JNZ, CMP, INC, DEC, PUSH, POP, CALL, RET]
 
 class Instruccion(ABC):    
     @abstractmethod
@@ -172,3 +176,65 @@ class Dec(Instruccion):
 
     def toString(self):
         return f"dec {self.param}"
+
+class Push(Instruccion):
+    def __init__(self, param):
+        self.param = param
+
+    def processInstruction(self, processor):
+        processor.pushStack(self.param)
+        processor.increaseIP()
+
+    def validateParameters(self):
+        if self.param not in ACCESIBLE_REGISTERS and not self.param.isnumeric():
+            raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param))
+
+    def toString(self):
+        return f"push {self.param}"
+
+class Pop(Instruccion):
+    def __init__(self, param):
+        self.param = param
+
+    def processInstruction(self, processor):
+        processor.popStack(self.param)
+        processor.increaseIP()
+
+    def validateParameters(self):
+        if self.param not in ACCESIBLE_REGISTERS:
+            raise Exception(INVALID_PARAMETER.format(self.param))
+
+    def toString(self):
+        return f"pop {self.param}"
+
+class Call(Instruccion):
+    def __init__(self, param):
+        self.param = param
+
+    def getParameter(self):
+        return self.param
+
+    def setParameter(self, value):
+        self.param = value
+
+    def processInstruction(self, processor):
+        instructionReturn = processor.getRegister(IP) + 1
+        processor.pushStack(str(instructionReturn))
+        processor.setRegister(IP, self.param)
+
+    def validateParameters(self):
+        pass
+
+    def toString(self):
+        return f"call {self.param}"
+
+class Ret(Instruccion):
+    def processInstruction(self, processor):
+        instructionReturn = processor.getPopStack()
+        processor.setRegister(IP, instructionReturn)
+
+    def validateParameters(self):
+        pass
+
+    def toString(self):
+        return "ret"

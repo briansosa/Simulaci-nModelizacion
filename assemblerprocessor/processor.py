@@ -7,6 +7,8 @@ FLAG = "flag"
 
 ACCESIBLE_REGISTERS = [AX, BX, CX, DX]
 
+EMPTY_STACK = "Empty stack. Value not available"
+
 class Processor:
     def __init__(self):
         self.ax = 0
@@ -15,6 +17,7 @@ class Processor:
         self.dx = 0
         self.ip = 0
         self.flag = 0
+        self.stack = []
     
     def setRegister(self, register, value : int):
         if register == AX:
@@ -46,9 +49,29 @@ class Processor:
             return self.flag
         # ELSE LANZAR UNA EXCEPCION
 
+    def pushStack(self, value):
+        if not value.isnumeric():
+            self.stack.append(self.getRegister(value))
+        else:
+            self.stack.append(int(value))
+
+    def popStack(self, register : str):
+        if len(self.stack) != 0:
+            valueStack = self.stack.pop()
+            self.setRegister(register, valueStack)
+        else:
+            raise Exception(EMPTY_STACK)
+
+    def getPopStack(self):
+        if len(self.stack) != 0:
+            return self.stack.pop()
+        else:
+            raise Exception(EMPTY_STACK)
+
+        
     def increaseIP(self):
         self.ip += 1
 
     def showRegisters(self):
-        return f"ax: {self.ax}, bx: {self.bx}, cx: {self.cx}, dx: {self.dx}, ip: {self.ip}, flag: {self.flag}"
+        return f"ax: {self.ax}, bx: {self.bx}, cx: {self.cx}, dx: {self.dx}, ip: {self.ip}, flag: {self.flag}, stack: {self.stack}"
             

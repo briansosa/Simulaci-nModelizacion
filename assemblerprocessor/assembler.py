@@ -65,10 +65,13 @@ class Assembler:
             elif self.isInstruction(line):
                 instructionName, parameters = self.parseInstruction(line)
                 try:
-                    instruction = self.generateInstruction(instructionName, parameters)
-                    instruction.validateParameters()
+                    if not parameters:
+                        instruction = self.generateInstructionWithoutParameter(instructionName)
+                    else:
+                        instruction = self.generateInstruction(instructionName, parameters)
+                        instruction.validateParameters()
                     self.executable.addToInstructions(instruction)
-                    if isinstance(instruction, Jmp) or isinstance(instruction, Jnz):
+                    if isinstance(instruction, Jmp) or isinstance(instruction, Jnz) or isinstance(instruction, Call):
                         self.instructionsToReplace.append((self.indexInstruction, indexSourceCode))
                     self.indexInstruction += 1
                 except Exception as e:
@@ -104,6 +107,12 @@ class Assembler:
                 return Inc(listParams[0])
             elif instructionName == DEC:
                 return Dec(listParams[0])
+            elif instructionName == PUSH:
+                return Push(listParams[0])
+            elif instructionName == POP:
+                return Pop(listParams[0])
+            elif instructionName == CALL:
+                return Call(listParams[0])
         elif len(listParams) == 2:
             if instructionName == MOV:
                 return Mov(listParams[0], listParams[1])
@@ -113,7 +122,14 @@ class Assembler:
                 return Cmp(listParams[0], listParams[1])
         else:
             raise Exception("Error to generate instruction")
-    
+
+    def generateInstructionWithoutParameter(self, instructionName):
+        if instructionName == RET:
+            return Ret()  
+        else:
+            raise Exception("Error to generate instruction")
+
+
     def parseParameters(self, parameters):
         parametersList = []
         oneParamRegex = '^(\w+)\s*$'
@@ -148,11 +164,16 @@ class Assembler:
         return match.group(1)
 
     def isInstruction(self, line):
-        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz)\s+([\w_,\s]+)', line)
+        match = re.search('^(ret)', line)
+        if match:
+            return match and match.group(1) in VALID_INSTRUCCION
+        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_,\s]+)', line)
         return match and match.group(1) in VALID_INSTRUCCION
     
     def parseInstruction(self, line):
-        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz)\s+([\w_,\s]+)', line)
+        if re.search('^(ret)', line):
+            return ("ret","")
+        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_,\s]+)', line)
         return (match.group(1), match.group(2))
 
     def cleanLine(self, line):
@@ -168,3 +189,4 @@ class Assembler:
     def getSourceCodeFromFile(self, file):
         listCleanLines = [self.cleanLine(line) for line in file if len(self.cleanLine(line)) != 0 and self.cleanLine(line)[0] != COMMENT]
         return listCleanLines
+
