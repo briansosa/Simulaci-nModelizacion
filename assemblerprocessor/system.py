@@ -1,28 +1,39 @@
-import time
+import random
 from processor import *
+from process import Process, FINISHED, WAITING
 
-SLEEP_SECONDS = 1.5
 
 class System:
-    def __init__(self, executable, processor, visualizer):
-        self.executable = executable
-        self.processor = processor
-        self.visualizer = visualizer
 
-    def process(self):
-        self.processor.setRegister(IP, self.executable.getEntryPoint())
-        instructions = self.executable.getInstructions()
-        # self.visualizer.showWindow(instructions, self.processor)
-        # time.sleep(SLEEP_SECONDS)
-        while (self.processor.getRegister(IP) < len(instructions)):
-            indexInstruction = self.processor.getRegister(IP)
-            instruction = instructions[indexInstruction]
-            instruction.processInstruction(self.processor)
-            print(self.processor.showRegisters())
-            # self.visualizer.showWindow(instructions, self.processor)
-            # time.sleep(SLEEP_SECONDS)
-            # # if self.visualizer.stdscr.getch() == ord('q'):
-            #     raise Exception("Finish program :)")
+    @classmethod
+    def NewSystem(cls, executables, processor):
+        cls.instructionsCounter = 0
+        cls.burstOfInstructions = 5
+        cls.executables = executables
+        cls.processor = processor
+        cls.processes = [Process(executable) for executable in cls.executables]
+        cls.activeProcess = cls.processes[0]  # Validar que no sea nulo
+        cls.processor.setProcess(cls.activeProcess)
+        cls.active = True
 
+    @classmethod
+    def ClockHandler(cls):
+        cls.instructionsCounter += 1
+        if cls.instructionsCounter >= cls.burstOfInstructions or cls.activeProcess.getState() == FINISHED: 
+            cls.processor.saveContext()
+            cls.activeProcess = cls.getNextProcess()
+            if cls.activeProcess:
+                cls.processor.setProcess(cls.activeProcess)
+                cls.instructionsCounter = 0    
+
+    @classmethod
+    def getNextProcess(cls):
+        processes = list(filter(lambda process: (process.getState() == WAITING), cls.processes))
+        if len(processes) != 0:
+            randomNumber = random.randint(0, len(processes) - 1)
+            return processes[randomNumber]
+        else:
+            cls.active = False
+            return None
 
 

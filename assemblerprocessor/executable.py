@@ -4,9 +4,10 @@ class Executable:
         self.instructions = []
         self.lookupTable = dict()
         self.sourceCode = []
+        self.stack = []
 
-    def process(self, filename):
-        pass
+    def getStack(self):
+        return self.stack
 
     def setSourceCode(self, sourceCode):
         self.sourceCode = sourceCode

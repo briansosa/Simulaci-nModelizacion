@@ -1,5 +1,12 @@
-no_hacenada:
+pepa:
+	mov dx, 3
+	mov dx, 3
+
+Entry_point:
     mov ax, 1
-    inc bx
-    cmp bx, 2
-    jnz a_la_grande_le_puse_cuca
+    inc ax
+    inc ax
+    inc ax
+    inc ax
+    inc ax
+    inc ax 

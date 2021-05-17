@@ -5,9 +5,9 @@ from system import *
 import re
 
 COMMENT = "#"
-COMPILATION_ERROR = "Error in line {line}: {error}"
+COMPILATION_ERROR = "Error in file {filename} line {line}: {error}"
 INVALID_LINE = "Invalid line"
-LABEL_NOT_FOUND = "Label '{label}' not found"
+LABEL_NOT_FOUND = "Label '{label}' not found."
 
 
 class Assembler:
@@ -23,9 +23,8 @@ class Assembler:
             self.executable.setSourceCode(self.getSourceCodeFromFile(file))
 
         self.generateInstructionLibraries(self.executable.getSourceCode())
-        print(self.listInstructionLibraries)
         self.processLibraries()
-        self.processSourceCode(self.executable.getSourceCode())
+        self.processSourceCode(filename, self.executable.getSourceCode())
 
         if not self.error: 
             self.executable.setEntryPoint()
@@ -53,9 +52,9 @@ class Assembler:
 
     def processLibraries(self):
         for filename, sourceCode in self.listInstructionLibraries:
-            self.processSourceCode(sourceCode)
+            self.processSourceCode(filename, sourceCode)
 
-    def processSourceCode(self, sourceCode):
+    def processSourceCode(self, filename, sourceCode):
         for indexSourceCode, line in enumerate(sourceCode):
             if len(line) == 0 or line[0] == COMMENT or self.isInclude(line):
                 continue
@@ -72,13 +71,13 @@ class Assembler:
                         instruction.validateParameters()
                     self.executable.addToInstructions(instruction)
                     if isinstance(instruction, Jmp) or isinstance(instruction, Jnz) or isinstance(instruction, Call):
-                        self.instructionsToReplace.append((self.indexInstruction, indexSourceCode))
+                        self.instructionsToReplace.append([self.indexInstruction, indexSourceCode, filename])
                     self.indexInstruction += 1
                 except Exception as e:
-                    self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = str(e))
+                    self.error = COMPILATION_ERROR.format(filename = filename, line = indexSourceCode, error = str(e))
                     break
             else:
-                self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = INVALID_LINE)
+                self.error = COMPILATION_ERROR.format(filename = filename, line = indexSourceCode, error = INVALID_LINE)
 
     def hasError(self):
         return self.error != ""
@@ -87,14 +86,15 @@ class Assembler:
         return self.error
 
     def replaceLabelForIndexInstruction(self):
-        for indexInstruction, indexSourceCode in self.instructionsToReplace:
+        for instructionToReplace in self.instructionsToReplace:
+            indexInstruction, indexSourceCode, filename = instructionToReplace[0], instructionToReplace[1], instructionToReplace[2]
             instruction = self.executable.getInstruction(indexInstruction)
             label = instruction.getParameter()
             if label in self.executable.getLookupTable():
                 lookupIndex = self.executable.getToLookupTable(label)
                 instruction.setParameter(lookupIndex)
             else:
-                self.error = COMPILATION_ERROR.format(line = indexSourceCode, error = LABEL_NOT_FOUND.format(label = label)) 
+                self.error = COMPILATION_ERROR.format(filename = filename, line = indexSourceCode, error = LABEL_NOT_FOUND.format(label = label)) 
 
     def generateInstruction(self, instructionName, parameters):
         listParams = self.parseParameters(parameters)
@@ -190,3 +190,9 @@ class Assembler:
         listCleanLines = [self.cleanLine(line) for line in file if len(self.cleanLine(line)) != 0 and self.cleanLine(line)[0] != COMMENT]
         return listCleanLines
 
+    def clear(self):
+        self.error = ""
+        self.executable = Executable()
+        self.instructionsToReplace = []
+        self.listInstructionLibraries = []
+        self.indexInstruction = 0

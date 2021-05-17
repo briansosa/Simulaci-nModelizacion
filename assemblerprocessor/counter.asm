@@ -1,12 +1,13 @@
-include oneline.asm
+pepe:
+	mov cx, 3
+	mov cx, 3
 
 Entry_point:
-	Mov Ax, 10 
-	inc cx
-	cmp cx, 5
-	jnz a_la_grande_le_puse_cuca
-Ciclo:
-	Add ax, cx
-	Inc cx
-	Cmp cx, 3
-	Jnz ciclo
+	mov bx, 1
+	inc bx
+	inc bx
+	inc bx
+	inc bx
+	inc bx
+	inc bx
+	inc bx

@@ -1,35 +1,51 @@
 import sys
 from assembler import *
 from visualizer import *
+from system import *
 from curses import wrapper
 
 HEIGHT = 10
 WIDTH = 40
 
-# def main(stdscr):
-def main():
-    fileName = 'counter.asm'
+def main(stdscr):
+    fileNames = ''
     if len(sys.argv) >= 2:
-        fileName = sys.argv[1]
-    assembler = Assembler()
-    assembler.generateExecutable(fileName)
-
-    if (not assembler.hasError()):
-        executable = assembler.getExecutable()
-        processor = Processor()
-        # visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
-        # system = System(executable, processor, visualizer)
-        system = System(executable, processor, "visualizer")
-        system.process()
-
-        # Desactivando el visualizador
-        # try:
-            # system.process()
-        # except Exception as e:
-        #     pass
+        fileNames = sys.argv[1:]
     else:
-        print(assembler.getError())
+        print('Not files to process')
+        return
+
+    assembler = Assembler()
+    visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
+    processor = Processor(visualizer)
+    executables = []
+    for fileName in fileNames:
+        assembler.generateExecutable(fileName)
+        if (not assembler.hasError()):
+            executables.append(assembler.getExecutable())
+            assembler.clear()
+        else:
+            print(assembler.getError())
+            return
+
+    System.NewSystem(executables, processor)
+    processor.executeProcess()
+
+    # assembler.generateExecutable(fileName)
+
+    # if (not assembler.hasError()):
+    #     executable = assembler.getExecutable()    
+    #     visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
+    #     processor = Processor(executable, visualizer)
+    #     processor.process()
+
+    #     # Desactivando el visualizador
+    #     try:
+    #         system.process()
+    #     except Exception as e:
+    #         pass
+    # else:
+    #     print(assembler.getError())
     
 
-# wrapper(main)
-main()
+wrapper(main)
