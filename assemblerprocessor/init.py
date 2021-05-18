@@ -1,18 +1,22 @@
 import sys
 from assembler import *
+from log import *
 from visualizer import *
 from system import *
 from curses import wrapper
+
 
 HEIGHT = 10
 WIDTH = 40
 
 def main(stdscr):
+    Log.Init()
     fileNames = ''
     if len(sys.argv) >= 2:
         fileNames = sys.argv[1:]
     else:
         print('Not files to process')
+        Log.Write('Not files to process')
         return
 
     assembler = Assembler()
@@ -26,26 +30,14 @@ def main(stdscr):
             assembler.clear()
         else:
             print(assembler.getError())
+            Log.Write(assembler.getError())
             return
 
     System.NewSystem(executables, processor)
     processor.executeProcess()
 
-    # assembler.generateExecutable(fileName)
-
-    # if (not assembler.hasError()):
-    #     executable = assembler.getExecutable()    
-    #     visualizer = Visualizer(stdscr, HEIGHT, WIDTH)
-    #     processor = Processor(executable, visualizer)
-    #     processor.process()
-
-    #     # Desactivando el visualizador
-    #     try:
-    #         system.process()
-    #     except Exception as e:
-    #         pass
-    # else:
-    #     print(assembler.getError())
-    
+# hacer programa de fibonacci
+# programa que encuentre las raices de una funcion cuadratica
+# mas funciones matematicas
 
 wrapper(main)

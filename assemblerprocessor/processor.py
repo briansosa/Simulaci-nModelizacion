@@ -1,6 +1,7 @@
 import time
 from system import System
 from process import EXECUTING, FINISHED, WAITING
+from log import *
 
 AX = "ax"
 BX = "bx"
@@ -10,7 +11,7 @@ IP = "ip"
 FLAG = "flag"
 
 ACCESIBLE_REGISTERS = [AX, BX, CX, DX]
-SLEEP_SECONDS = 2.5
+SLEEP_SECONDS = 0.1
 EMPTY_STACK = "Empty stack. Value not available"
 
 class Processor:
@@ -104,18 +105,17 @@ class Processor:
             
     def executeProcess(self):
         while(System.active):
-            self.visualizer.showWindow(self.executable.getInstructions(), self)
+            instructions = self.executable.getInstructions()
+            self.visualizer.showWindow(instructions, self)
             time.sleep(SLEEP_SECONDS)
-            while (self.getRegister(IP) < len(self.executable.getInstructions())):
-                instructions = self.executable.getInstructions()
-                indexInstruction = self.getRegister(IP)
-                instruction = instructions[indexInstruction]
-                instruction.processInstruction(self)
-                print(self.showRegisters())
-                self.visualizer.showWindow(instructions, self)
-                time.sleep(SLEEP_SECONDS)
-                if self.getRegister(IP) >= len(instructions):
-                    self.process.setState(FINISHED)
-                System.ClockHandler()
-                if self.visualizer.stdscr.getch() == ord('q'):
-                    raise Exception("Finish program :)")
+            indexInstruction = self.getRegister(IP)
+            instruction = instructions[indexInstruction]
+            instruction.processInstruction(self)
+            self.visualizer.showWindow(instructions, self)
+            time.sleep(SLEEP_SECONDS)
+            if self.getRegister(IP) >= len(instructions):
+                self.process.setState(FINISHED)
+            Log.Write(self.showRegisters())
+            System.ClockHandler()
+            if self.visualizer.stdscr.getch() == ord('q'):
+                raise Exception("Finish program :)")

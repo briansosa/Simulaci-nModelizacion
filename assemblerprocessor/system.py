@@ -1,7 +1,7 @@
 import random
+from log import *
 from processor import *
 from process import Process, FINISHED, WAITING
-
 
 class System:
 
@@ -12,28 +12,33 @@ class System:
         cls.executables = executables
         cls.processor = processor
         cls.processes = [Process(executable) for executable in cls.executables]
-        cls.activeProcess = cls.processes[0]  # Validar que no sea nulo
+        cls.activeProcess = cls.processes[0]
         cls.processor.setProcess(cls.activeProcess)
         cls.active = True
+        Log.WriteLines(["Processes:", cls.processes])
+        Log.WriteLines(["Active process:", cls.activeProcess])
 
     @classmethod
     def ClockHandler(cls):
         cls.instructionsCounter += 1
-        if cls.instructionsCounter >= cls.burstOfInstructions or cls.activeProcess.getState() == FINISHED: 
+        if cls.instructionsCounter >= cls.burstOfInstructions or cls.activeProcess.getState() == FINISHED:
             cls.processor.saveContext()
             cls.activeProcess = cls.getNextProcess()
+            Log.WriteLines(["Change context. Active process:", cls.activeProcess])
             if cls.activeProcess:
                 cls.processor.setProcess(cls.activeProcess)
                 cls.instructionsCounter = 0    
 
     @classmethod
     def getNextProcess(cls):
-        processes = list(filter(lambda process: (process.getState() == WAITING), cls.processes))
-        if len(processes) != 0:
-            randomNumber = random.randint(0, len(processes) - 1)
-            return processes[randomNumber]
+        index = cls.processes.index(cls.activeProcess)
+        waitingProcesses = list(filter(lambda process: (process.getState() == WAITING), cls.processes[index + 1:]))
+        if len(waitingProcesses) != 0:
+            return waitingProcesses[0]
         else:
-            cls.active = False
-            return None
-
-
+            waitingProcesses = list(filter(lambda process: (process.getState() == WAITING), cls.processes[:index]))
+            if len(waitingProcesses) != 0:
+                return waitingProcesses[0]
+            elif cls.activeProcess.getState() != WAITING:
+                cls.active = False
+                return None

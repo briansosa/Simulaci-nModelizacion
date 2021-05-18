@@ -7,7 +7,3 @@ Entry_point:
 	inc bx
 	inc bx
 	inc bx
-	inc bx
-	inc bx
-	inc bx
-	inc bx

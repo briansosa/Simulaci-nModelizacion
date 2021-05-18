@@ -80,8 +80,8 @@ class Cmp(Instruccion):
         self.param2 = param2
 
     def validateParameters(self):
-        if self.param1 not in ACCESIBLE_REGISTERS:
-            raise Exception(INVALID_PARAMETER.format(self.param1))
+        if self.param1 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
+            raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param1))
         elif self.param2 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param2))
 

@@ -3,3 +3,9 @@ Entry_point:
     inc cx
     inc cx
     inc cx
+    inc cx
+    inc cx
+    inc cx
+    inc cx
+    inc cx
+    inc cx
