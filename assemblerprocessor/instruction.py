@@ -80,13 +80,17 @@ class Cmp(Instruccion):
         self.param2 = param2
 
     def validateParameters(self):
-        if self.param1 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
+        if self.param1 not in ACCESIBLE_REGISTERS and not self.param1.isnumeric():
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param1))
         elif self.param2 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param2))
 
     def processInstruction(self, processor):
-        valueRegisterParam1 = processor.getRegister(self.param1)
+        valueRegisterParam1 = 0
+        if self.param1.isnumeric():
+            valueRegisterParam1 = int(self.param1)
+        else:
+            valueRegisterParam1 = processor.getRegister(self.param1)
         if self.param2.isnumeric():
             if valueRegisterParam1 <= int(self.param2):
                 processor.setRegister(FLAG, 1)

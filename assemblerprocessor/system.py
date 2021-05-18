@@ -39,6 +39,8 @@ class System:
             waitingProcesses = list(filter(lambda process: (process.getState() == WAITING), cls.processes[:index]))
             if len(waitingProcesses) != 0:
                 return waitingProcesses[0]
-            elif cls.activeProcess.getState() != WAITING:
+            elif cls.activeProcess.getState() == WAITING:
+                return cls.activeProcess 
+            else:
                 cls.active = False
                 return None
