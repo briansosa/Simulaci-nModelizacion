@@ -1,5 +1,5 @@
 include math.asm
 
 entry_point:
-    push 16
+    push 9
     call sqrt

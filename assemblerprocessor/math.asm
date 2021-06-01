@@ -46,13 +46,16 @@ sqrt:
     push ax
     dec bx
     mov ax, 0
+    mov dx, 0
 loop_sqrt:
-    mov dx, ax
+    push dx
     push bx
     push ax
     push ax
     call multiply
     pop bx
+    pop dx
+    inc dx
     cmp ax, bx
     inc ax
     jnz loop_sqrt

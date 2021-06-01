@@ -151,3 +151,488 @@ ax: 26, bx: 15, cx: 0, dx: 5, ip: 42, flag: 0, stack: [45]
 ax: 26, bx: 15, cx: 0, dx: 5, ip: 45, flag: 0, stack: []
 Change context. Active process:
 None
+
+---------------------------------------------------------------
+
+Processes:
+[<process.Process object at 0x00B80D60>]
+Active process:
+<process.Process object at 0x00B80D60>
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 44, flag: 0, stack: [16]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 28, flag: 0, stack: [16, 45]
+ax: 45, bx: 0, cx: 0, dx: 0, ip: 29, flag: 0, stack: [16]
+ax: 45, bx: 16, cx: 0, dx: 0, ip: 30, flag: 0, stack: []
+ax: 45, bx: 16, cx: 0, dx: 0, ip: 31, flag: 0, stack: [45]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 45, bx: 15, cx: 0, dx: 0, ip: 32, flag: 0, stack: [45]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 33, flag: 0, stack: [45]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 34, flag: 0, stack: [45]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 35, flag: 0, stack: [45, 15]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 36, flag: 0, stack: [45, 15, 0]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 37, flag: 0, stack: [45, 15, 0, 0]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 0, flag: 0, stack: [45, 15, 0, 0, 38]
+ax: 38, bx: 15, cx: 0, dx: 1, ip: 1, flag: 0, stack: [45, 15, 0, 0]
+ax: 38, bx: 0, cx: 0, dx: 1, ip: 2, flag: 0, stack: [45, 15, 0]
+ax: 38, bx: 0, cx: 0, dx: 1, ip: 3, flag: 0, stack: [45, 15]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 38, bx: 0, cx: 0, dx: 1, ip: 4, flag: 0, stack: [45, 15, 38]
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 5, flag: 0, stack: [45, 15, 38]
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 6, flag: 0, stack: [45, 15, 38]
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 7, flag: 0, stack: [45, 15, 38]
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 8, flag: 0, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 9, flag: 0, stack: [45, 15, 38]
+ax: 0, bx: 0, cx: 0, dx: 1, ip: 38, flag: 0, stack: [45, 15]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 39, flag: 0, stack: [45]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 40, flag: 1, stack: [45]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 41, flag: 1, stack: [45]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 33, flag: 1, stack: [45]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 34, flag: 1, stack: [45]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 35, flag: 1, stack: [45, 15]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 36, flag: 1, stack: [45, 15, 1]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 37, flag: 1, stack: [45, 15, 1, 1]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 0, flag: 1, stack: [45, 15, 1, 1, 38]
+ax: 38, bx: 15, cx: 0, dx: 2, ip: 1, flag: 1, stack: [45, 15, 1, 1]
+ax: 38, bx: 1, cx: 0, dx: 2, ip: 2, flag: 1, stack: [45, 15, 1]
+ax: 38, bx: 1, cx: 1, dx: 2, ip: 3, flag: 1, stack: [45, 15]
+ax: 38, bx: 1, cx: 1, dx: 2, ip: 4, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 0, bx: 1, cx: 1, dx: 2, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 1, bx: 1, cx: 1, dx: 2, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 1, bx: 1, cx: 0, dx: 2, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 1, bx: 1, cx: 0, dx: 2, ip: 8, flag: 0, stack: [45, 15, 38]
+ax: 1, bx: 1, cx: 0, dx: 2, ip: 9, flag: 0, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 1, bx: 1, cx: 0, dx: 2, ip: 38, flag: 0, stack: [45, 15]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 39, flag: 0, stack: [45]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 40, flag: 1, stack: [45]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 41, flag: 1, stack: [45]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 33, flag: 1, stack: [45]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 2, bx: 15, cx: 0, dx: 3, ip: 34, flag: 1, stack: [45]
+ax: 2, bx: 15, cx: 0, dx: 3, ip: 35, flag: 1, stack: [45, 15]
+ax: 2, bx: 15, cx: 0, dx: 3, ip: 36, flag: 1, stack: [45, 15, 2]
+ax: 2, bx: 15, cx: 0, dx: 3, ip: 37, flag: 1, stack: [45, 15, 2, 2]
+ax: 2, bx: 15, cx: 0, dx: 3, ip: 0, flag: 1, stack: [45, 15, 2, 2, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 38, bx: 15, cx: 0, dx: 3, ip: 1, flag: 1, stack: [45, 15, 2, 2]
+ax: 38, bx: 2, cx: 0, dx: 3, ip: 2, flag: 1, stack: [45, 15, 2]
+ax: 38, bx: 2, cx: 2, dx: 3, ip: 3, flag: 1, stack: [45, 15]
+ax: 38, bx: 2, cx: 2, dx: 3, ip: 4, flag: 1, stack: [45, 15, 38]
+ax: 0, bx: 2, cx: 2, dx: 3, ip: 5, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 2, bx: 2, cx: 2, dx: 3, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 2, bx: 2, cx: 1, dx: 3, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 2, bx: 2, cx: 1, dx: 3, ip: 8, flag: 1, stack: [45, 15, 38]
+ax: 2, bx: 2, cx: 1, dx: 3, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 4, bx: 2, cx: 1, dx: 3, ip: 6, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 4, bx: 2, cx: 0, dx: 3, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 4, bx: 2, cx: 0, dx: 3, ip: 8, flag: 0, stack: [45, 15, 38]
+ax: 4, bx: 2, cx: 0, dx: 3, ip: 9, flag: 0, stack: [45, 15, 38]
+ax: 4, bx: 2, cx: 0, dx: 3, ip: 38, flag: 0, stack: [45, 15]
+ax: 4, bx: 15, cx: 0, dx: 3, ip: 39, flag: 0, stack: [45]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 4, bx: 15, cx: 0, dx: 3, ip: 40, flag: 1, stack: [45]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 41, flag: 1, stack: [45]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 33, flag: 1, stack: [45]
+ax: 5, bx: 15, cx: 0, dx: 4, ip: 34, flag: 1, stack: [45]
+ax: 5, bx: 15, cx: 0, dx: 4, ip: 35, flag: 1, stack: [45, 15]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 5, bx: 15, cx: 0, dx: 4, ip: 36, flag: 1, stack: [45, 15, 5]
+ax: 5, bx: 15, cx: 0, dx: 4, ip: 37, flag: 1, stack: [45, 15, 5, 5]
+ax: 5, bx: 15, cx: 0, dx: 4, ip: 0, flag: 1, stack: [45, 15, 5, 5, 38]
+ax: 38, bx: 15, cx: 0, dx: 4, ip: 1, flag: 1, stack: [45, 15, 5, 5]
+ax: 38, bx: 5, cx: 0, dx: 4, ip: 2, flag: 1, stack: [45, 15, 5]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 38, bx: 5, cx: 5, dx: 4, ip: 3, flag: 1, stack: [45, 15]
+ax: 38, bx: 5, cx: 5, dx: 4, ip: 4, flag: 1, stack: [45, 15, 38]
+ax: 0, bx: 5, cx: 5, dx: 4, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 5, bx: 5, cx: 5, dx: 4, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 5, bx: 5, cx: 4, dx: 4, ip: 7, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 5, bx: 5, cx: 4, dx: 4, ip: 8, flag: 1, stack: [45, 15, 38]
+ax: 5, bx: 5, cx: 4, dx: 4, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 10, bx: 5, cx: 4, dx: 4, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 10, bx: 5, cx: 3, dx: 4, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 10, bx: 5, cx: 3, dx: 4, ip: 8, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 10, bx: 5, cx: 3, dx: 4, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 15, bx: 5, cx: 3, dx: 4, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 15, bx: 5, cx: 2, dx: 4, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 15, bx: 5, cx: 2, dx: 4, ip: 8, flag: 1, stack: [45, 15, 38]
+ax: 15, bx: 5, cx: 2, dx: 4, ip: 5, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 20, bx: 5, cx: 2, dx: 4, ip: 6, flag: 1, stack: [45, 15, 38]
+ax: 20, bx: 5, cx: 1, dx: 4, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 20, bx: 5, cx: 1, dx: 4, ip: 8, flag: 1, stack: [45, 15, 38]
+ax: 20, bx: 5, cx: 1, dx: 4, ip: 5, flag: 1, stack: [45, 15, 38]
+ax: 25, bx: 5, cx: 1, dx: 4, ip: 6, flag: 1, stack: [45, 15, 38]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 25, bx: 5, cx: 0, dx: 4, ip: 7, flag: 1, stack: [45, 15, 38]
+ax: 25, bx: 5, cx: 0, dx: 4, ip: 8, flag: 0, stack: [45, 15, 38]
+ax: 25, bx: 5, cx: 0, dx: 4, ip: 9, flag: 0, stack: [45, 15, 38]
+ax: 25, bx: 5, cx: 0, dx: 4, ip: 38, flag: 0, stack: [45, 15]
+ax: 25, bx: 15, cx: 0, dx: 4, ip: 39, flag: 0, stack: [45]
+Change context. Active process:
+<process.Process object at 0x00B80D60>
+ax: 25, bx: 15, cx: 0, dx: 4, ip: 40, flag: 0, stack: [45]
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 41, flag: 0, stack: [45]
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 42, flag: 0, stack: [45]
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 45, flag: 0, stack: []
+Change context. Active process:
+None
+
+---------------------------------------------------------------
+
+Processes:
+[<process.Process object at 0x01470D60>]
+Active process:
+<process.Process object at 0x01470D60>
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 47, flag: 0, stack: [16]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 28, flag: 0, stack: [16, 48]
+ax: 48, bx: 0, cx: 0, dx: 0, ip: 29, flag: 0, stack: [16]
+ax: 48, bx: 16, cx: 0, dx: 0, ip: 30, flag: 0, stack: []
+ax: 48, bx: 16, cx: 0, dx: 0, ip: 31, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 48, bx: 15, cx: 0, dx: 0, ip: 32, flag: 0, stack: [48]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 33, flag: 0, stack: [48]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 34, flag: 0, stack: [48]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 35, flag: 0, stack: [48, 0]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 36, flag: 0, stack: [48, 0, 15]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 37, flag: 0, stack: [48, 0, 15, 0]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 38, flag: 0, stack: [48, 0, 15, 0, 0]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 0, flag: 0, stack: [48, 0, 15, 0, 0, 39]
+ax: 39, bx: 15, cx: 0, dx: 0, ip: 1, flag: 0, stack: [48, 0, 15, 0, 0]
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 2, flag: 0, stack: [48, 0, 15, 0]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 3, flag: 0, stack: [48, 0, 15]
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 4, flag: 0, stack: [48, 0, 15, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 5, flag: 0, stack: [48, 0, 15, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 6, flag: 0, stack: [48, 0, 15, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 7, flag: 0, stack: [48, 0, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 8, flag: 0, stack: [48, 0, 15, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 9, flag: 0, stack: [48, 0, 15, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 39, flag: 0, stack: [48, 0, 15]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 40, flag: 0, stack: [48, 0]
+ax: 0, bx: 15, cx: 0, dx: 0, ip: 41, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 42, flag: 0, stack: [48]
+ax: 0, bx: 15, cx: 0, dx: 1, ip: 43, flag: 1, stack: [48]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 44, flag: 1, stack: [48]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 34, flag: 1, stack: [48]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 35, flag: 1, stack: [48, 1]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 36, flag: 1, stack: [48, 1, 15]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 37, flag: 1, stack: [48, 1, 15, 1]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 38, flag: 1, stack: [48, 1, 15, 1, 1]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 0, flag: 1, stack: [48, 1, 15, 1, 1, 39]
+ax: 39, bx: 15, cx: 0, dx: 1, ip: 1, flag: 1, stack: [48, 1, 15, 1, 1]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 39, bx: 1, cx: 0, dx: 1, ip: 2, flag: 1, stack: [48, 1, 15, 1]
+ax: 39, bx: 1, cx: 1, dx: 1, ip: 3, flag: 1, stack: [48, 1, 15]
+ax: 39, bx: 1, cx: 1, dx: 1, ip: 4, flag: 1, stack: [48, 1, 15, 39]
+ax: 0, bx: 1, cx: 1, dx: 1, ip: 5, flag: 1, stack: [48, 1, 15, 39]
+ax: 1, bx: 1, cx: 1, dx: 1, ip: 6, flag: 1, stack: [48, 1, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 7, flag: 1, stack: [48, 1, 15, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 8, flag: 0, stack: [48, 1, 15, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 9, flag: 0, stack: [48, 1, 15, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 39, flag: 0, stack: [48, 1, 15]
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 40, flag: 0, stack: [48, 1]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 1, bx: 15, cx: 0, dx: 1, ip: 41, flag: 0, stack: [48]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 42, flag: 0, stack: [48]
+ax: 1, bx: 15, cx: 0, dx: 2, ip: 43, flag: 1, stack: [48]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 44, flag: 1, stack: [48]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 34, flag: 1, stack: [48]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 35, flag: 1, stack: [48, 2]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 36, flag: 1, stack: [48, 2, 15]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 37, flag: 1, stack: [48, 2, 15, 2]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 38, flag: 1, stack: [48, 2, 15, 2, 2]
+ax: 2, bx: 15, cx: 0, dx: 2, ip: 0, flag: 1, stack: [48, 2, 15, 2, 2, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 39, bx: 15, cx: 0, dx: 2, ip: 1, flag: 1, stack: [48, 2, 15, 2, 2]
+ax: 39, bx: 2, cx: 0, dx: 2, ip: 2, flag: 1, stack: [48, 2, 15, 2]
+ax: 39, bx: 2, cx: 2, dx: 2, ip: 3, flag: 1, stack: [48, 2, 15]
+ax: 39, bx: 2, cx: 2, dx: 2, ip: 4, flag: 1, stack: [48, 2, 15, 39]
+ax: 0, bx: 2, cx: 2, dx: 2, ip: 5, flag: 1, stack: [48, 2, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 2, bx: 2, cx: 2, dx: 2, ip: 6, flag: 1, stack: [48, 2, 15, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 7, flag: 1, stack: [48, 2, 15, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 8, flag: 1, stack: [48, 2, 15, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 5, flag: 1, stack: [48, 2, 15, 39]
+ax: 4, bx: 2, cx: 1, dx: 2, ip: 6, flag: 1, stack: [48, 2, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 7, flag: 1, stack: [48, 2, 15, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 8, flag: 0, stack: [48, 2, 15, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 9, flag: 0, stack: [48, 2, 15, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 39, flag: 0, stack: [48, 2, 15]
+ax: 4, bx: 15, cx: 0, dx: 2, ip: 40, flag: 0, stack: [48, 2]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 4, bx: 15, cx: 0, dx: 2, ip: 41, flag: 0, stack: [48]
+ax: 4, bx: 15, cx: 0, dx: 3, ip: 42, flag: 0, stack: [48]
+ax: 4, bx: 15, cx: 0, dx: 3, ip: 43, flag: 1, stack: [48]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 44, flag: 1, stack: [48]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 34, flag: 1, stack: [48]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 35, flag: 1, stack: [48, 3]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 36, flag: 1, stack: [48, 3, 15]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 37, flag: 1, stack: [48, 3, 15, 5]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 38, flag: 1, stack: [48, 3, 15, 5, 5]
+ax: 5, bx: 15, cx: 0, dx: 3, ip: 0, flag: 1, stack: [48, 3, 15, 5, 5, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 39, bx: 15, cx: 0, dx: 3, ip: 1, flag: 1, stack: [48, 3, 15, 5, 5]
+ax: 39, bx: 5, cx: 0, dx: 3, ip: 2, flag: 1, stack: [48, 3, 15, 5]
+ax: 39, bx: 5, cx: 5, dx: 3, ip: 3, flag: 1, stack: [48, 3, 15]
+ax: 39, bx: 5, cx: 5, dx: 3, ip: 4, flag: 1, stack: [48, 3, 15, 39]
+ax: 0, bx: 5, cx: 5, dx: 3, ip: 5, flag: 1, stack: [48, 3, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 5, bx: 5, cx: 5, dx: 3, ip: 6, flag: 1, stack: [48, 3, 15, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 7, flag: 1, stack: [48, 3, 15, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 8, flag: 1, stack: [48, 3, 15, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 5, flag: 1, stack: [48, 3, 15, 39]
+ax: 10, bx: 5, cx: 4, dx: 3, ip: 6, flag: 1, stack: [48, 3, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 7, flag: 1, stack: [48, 3, 15, 39]
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 8, flag: 1, stack: [48, 3, 15, 39]
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 5, flag: 1, stack: [48, 3, 15, 39]
+ax: 15, bx: 5, cx: 3, dx: 3, ip: 6, flag: 1, stack: [48, 3, 15, 39]
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 7, flag: 1, stack: [48, 3, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 8, flag: 1, stack: [48, 3, 15, 39]
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 5, flag: 1, stack: [48, 3, 15, 39]
+ax: 20, bx: 5, cx: 2, dx: 3, ip: 6, flag: 1, stack: [48, 3, 15, 39]
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 7, flag: 1, stack: [48, 3, 15, 39]
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 8, flag: 1, stack: [48, 3, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 5, flag: 1, stack: [48, 3, 15, 39]
+ax: 25, bx: 5, cx: 1, dx: 3, ip: 6, flag: 1, stack: [48, 3, 15, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 7, flag: 1, stack: [48, 3, 15, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 8, flag: 0, stack: [48, 3, 15, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 9, flag: 0, stack: [48, 3, 15, 39]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 39, flag: 0, stack: [48, 3, 15]
+ax: 25, bx: 15, cx: 0, dx: 3, ip: 40, flag: 0, stack: [48, 3]
+ax: 25, bx: 15, cx: 0, dx: 3, ip: 41, flag: 0, stack: [48]
+ax: 25, bx: 15, cx: 0, dx: 4, ip: 42, flag: 0, stack: [48]
+ax: 25, bx: 15, cx: 0, dx: 4, ip: 43, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x01470D60>
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 44, flag: 0, stack: [48]
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 45, flag: 0, stack: [48]
+ax: 26, bx: 15, cx: 0, dx: 4, ip: 48, flag: 0, stack: []
+Change context. Active process:
+None
+
+---------------------------------------------------------------
+
+Processes:
+[<process.Process object at 0x02360D60>]
+Active process:
+<process.Process object at 0x02360D60>
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 47, flag: 0, stack: [9]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 28, flag: 0, stack: [9, 48]
+ax: 48, bx: 0, cx: 0, dx: 0, ip: 29, flag: 0, stack: [9]
+ax: 48, bx: 9, cx: 0, dx: 0, ip: 30, flag: 0, stack: []
+ax: 48, bx: 9, cx: 0, dx: 0, ip: 31, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 48, bx: 8, cx: 0, dx: 0, ip: 32, flag: 0, stack: [48]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 33, flag: 0, stack: [48]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 34, flag: 0, stack: [48]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 35, flag: 0, stack: [48, 0]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 36, flag: 0, stack: [48, 0, 8]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 37, flag: 0, stack: [48, 0, 8, 0]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 38, flag: 0, stack: [48, 0, 8, 0, 0]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 0, flag: 0, stack: [48, 0, 8, 0, 0, 39]
+ax: 39, bx: 8, cx: 0, dx: 0, ip: 1, flag: 0, stack: [48, 0, 8, 0, 0]
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 2, flag: 0, stack: [48, 0, 8, 0]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 3, flag: 0, stack: [48, 0, 8]
+ax: 39, bx: 0, cx: 0, dx: 0, ip: 4, flag: 0, stack: [48, 0, 8, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 5, flag: 0, stack: [48, 0, 8, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 6, flag: 0, stack: [48, 0, 8, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 7, flag: 0, stack: [48, 0, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 8, flag: 0, stack: [48, 0, 8, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 9, flag: 0, stack: [48, 0, 8, 39]
+ax: 0, bx: 0, cx: 0, dx: 0, ip: 39, flag: 0, stack: [48, 0, 8]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 40, flag: 0, stack: [48, 0]
+ax: 0, bx: 8, cx: 0, dx: 0, ip: 41, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 0, bx: 8, cx: 0, dx: 1, ip: 42, flag: 0, stack: [48]
+ax: 0, bx: 8, cx: 0, dx: 1, ip: 43, flag: 1, stack: [48]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 44, flag: 1, stack: [48]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 34, flag: 1, stack: [48]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 35, flag: 1, stack: [48, 1]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 36, flag: 1, stack: [48, 1, 8]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 37, flag: 1, stack: [48, 1, 8, 1]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 38, flag: 1, stack: [48, 1, 8, 1, 1]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 0, flag: 1, stack: [48, 1, 8, 1, 1, 39]
+ax: 39, bx: 8, cx: 0, dx: 1, ip: 1, flag: 1, stack: [48, 1, 8, 1, 1]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 39, bx: 1, cx: 0, dx: 1, ip: 2, flag: 1, stack: [48, 1, 8, 1]
+ax: 39, bx: 1, cx: 1, dx: 1, ip: 3, flag: 1, stack: [48, 1, 8]
+ax: 39, bx: 1, cx: 1, dx: 1, ip: 4, flag: 1, stack: [48, 1, 8, 39]
+ax: 0, bx: 1, cx: 1, dx: 1, ip: 5, flag: 1, stack: [48, 1, 8, 39]
+ax: 1, bx: 1, cx: 1, dx: 1, ip: 6, flag: 1, stack: [48, 1, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 7, flag: 1, stack: [48, 1, 8, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 8, flag: 0, stack: [48, 1, 8, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 9, flag: 0, stack: [48, 1, 8, 39]
+ax: 1, bx: 1, cx: 0, dx: 1, ip: 39, flag: 0, stack: [48, 1, 8]
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 40, flag: 0, stack: [48, 1]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 1, bx: 8, cx: 0, dx: 1, ip: 41, flag: 0, stack: [48]
+ax: 1, bx: 8, cx: 0, dx: 2, ip: 42, flag: 0, stack: [48]
+ax: 1, bx: 8, cx: 0, dx: 2, ip: 43, flag: 1, stack: [48]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 44, flag: 1, stack: [48]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 34, flag: 1, stack: [48]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 35, flag: 1, stack: [48, 2]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 36, flag: 1, stack: [48, 2, 8]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 37, flag: 1, stack: [48, 2, 8, 2]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 38, flag: 1, stack: [48, 2, 8, 2, 2]
+ax: 2, bx: 8, cx: 0, dx: 2, ip: 0, flag: 1, stack: [48, 2, 8, 2, 2, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 39, bx: 8, cx: 0, dx: 2, ip: 1, flag: 1, stack: [48, 2, 8, 2, 2]
+ax: 39, bx: 2, cx: 0, dx: 2, ip: 2, flag: 1, stack: [48, 2, 8, 2]
+ax: 39, bx: 2, cx: 2, dx: 2, ip: 3, flag: 1, stack: [48, 2, 8]
+ax: 39, bx: 2, cx: 2, dx: 2, ip: 4, flag: 1, stack: [48, 2, 8, 39]
+ax: 0, bx: 2, cx: 2, dx: 2, ip: 5, flag: 1, stack: [48, 2, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 2, bx: 2, cx: 2, dx: 2, ip: 6, flag: 1, stack: [48, 2, 8, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 7, flag: 1, stack: [48, 2, 8, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 8, flag: 1, stack: [48, 2, 8, 39]
+ax: 2, bx: 2, cx: 1, dx: 2, ip: 5, flag: 1, stack: [48, 2, 8, 39]
+ax: 4, bx: 2, cx: 1, dx: 2, ip: 6, flag: 1, stack: [48, 2, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 7, flag: 1, stack: [48, 2, 8, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 8, flag: 0, stack: [48, 2, 8, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 9, flag: 0, stack: [48, 2, 8, 39]
+ax: 4, bx: 2, cx: 0, dx: 2, ip: 39, flag: 0, stack: [48, 2, 8]
+ax: 4, bx: 8, cx: 0, dx: 2, ip: 40, flag: 0, stack: [48, 2]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 4, bx: 8, cx: 0, dx: 2, ip: 41, flag: 0, stack: [48]
+ax: 4, bx: 8, cx: 0, dx: 3, ip: 42, flag: 0, stack: [48]
+ax: 4, bx: 8, cx: 0, dx: 3, ip: 43, flag: 1, stack: [48]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 44, flag: 1, stack: [48]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 34, flag: 1, stack: [48]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 35, flag: 1, stack: [48, 3]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 36, flag: 1, stack: [48, 3, 8]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 37, flag: 1, stack: [48, 3, 8, 5]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 38, flag: 1, stack: [48, 3, 8, 5, 5]
+ax: 5, bx: 8, cx: 0, dx: 3, ip: 0, flag: 1, stack: [48, 3, 8, 5, 5, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 39, bx: 8, cx: 0, dx: 3, ip: 1, flag: 1, stack: [48, 3, 8, 5, 5]
+ax: 39, bx: 5, cx: 0, dx: 3, ip: 2, flag: 1, stack: [48, 3, 8, 5]
+ax: 39, bx: 5, cx: 5, dx: 3, ip: 3, flag: 1, stack: [48, 3, 8]
+ax: 39, bx: 5, cx: 5, dx: 3, ip: 4, flag: 1, stack: [48, 3, 8, 39]
+ax: 0, bx: 5, cx: 5, dx: 3, ip: 5, flag: 1, stack: [48, 3, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 5, bx: 5, cx: 5, dx: 3, ip: 6, flag: 1, stack: [48, 3, 8, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 7, flag: 1, stack: [48, 3, 8, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 8, flag: 1, stack: [48, 3, 8, 39]
+ax: 5, bx: 5, cx: 4, dx: 3, ip: 5, flag: 1, stack: [48, 3, 8, 39]
+ax: 10, bx: 5, cx: 4, dx: 3, ip: 6, flag: 1, stack: [48, 3, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 7, flag: 1, stack: [48, 3, 8, 39]
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 8, flag: 1, stack: [48, 3, 8, 39]
+ax: 10, bx: 5, cx: 3, dx: 3, ip: 5, flag: 1, stack: [48, 3, 8, 39]
+ax: 15, bx: 5, cx: 3, dx: 3, ip: 6, flag: 1, stack: [48, 3, 8, 39]
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 7, flag: 1, stack: [48, 3, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 8, flag: 1, stack: [48, 3, 8, 39]
+ax: 15, bx: 5, cx: 2, dx: 3, ip: 5, flag: 1, stack: [48, 3, 8, 39]
+ax: 20, bx: 5, cx: 2, dx: 3, ip: 6, flag: 1, stack: [48, 3, 8, 39]
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 7, flag: 1, stack: [48, 3, 8, 39]
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 8, flag: 1, stack: [48, 3, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 20, bx: 5, cx: 1, dx: 3, ip: 5, flag: 1, stack: [48, 3, 8, 39]
+ax: 25, bx: 5, cx: 1, dx: 3, ip: 6, flag: 1, stack: [48, 3, 8, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 7, flag: 1, stack: [48, 3, 8, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 8, flag: 0, stack: [48, 3, 8, 39]
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 9, flag: 0, stack: [48, 3, 8, 39]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 25, bx: 5, cx: 0, dx: 3, ip: 39, flag: 0, stack: [48, 3, 8]
+ax: 25, bx: 8, cx: 0, dx: 3, ip: 40, flag: 0, stack: [48, 3]
+ax: 25, bx: 8, cx: 0, dx: 3, ip: 41, flag: 0, stack: [48]
+ax: 25, bx: 8, cx: 0, dx: 4, ip: 42, flag: 0, stack: [48]
+ax: 25, bx: 8, cx: 0, dx: 4, ip: 43, flag: 0, stack: [48]
+Change context. Active process:
+<process.Process object at 0x02360D60>
+ax: 26, bx: 8, cx: 0, dx: 4, ip: 44, flag: 0, stack: [48]
+ax: 26, bx: 8, cx: 0, dx: 4, ip: 45, flag: 0, stack: [48]
+ax: 26, bx: 8, cx: 0, dx: 4, ip: 48, flag: 0, stack: []
+Change context. Active process:
+None
