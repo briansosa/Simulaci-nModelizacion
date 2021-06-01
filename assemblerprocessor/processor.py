@@ -1,5 +1,6 @@
 import time
 from system import System
+from validator import *
 from process import EXECUTING, FINISHED, WAITING
 from log import *
 
@@ -11,7 +12,7 @@ IP = "ip"
 FLAG = "flag"
 
 ACCESIBLE_REGISTERS = [AX, BX, CX, DX]
-SLEEP_SECONDS = 0.1
+SLEEP_SECONDS = 0.01
 EMPTY_STACK = "Empty stack. Value not available"
 
 class Processor:
@@ -78,7 +79,7 @@ class Processor:
         # ELSE LANZAR UNA EXCEPCION
 
     def pushStack(self, value):
-        if not value.isnumeric():
+        if not Validator.IsNumeric(value):
             self.executable.getStack().append(self.getRegister(value))
         else:
             self.executable.getStack().append(int(value))

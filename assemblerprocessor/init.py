@@ -40,4 +40,26 @@ def main(stdscr):
 # programa que encuentre las raices de una funcion cuadratica
 # mas funciones matematicas
 
+# division:
+# 10/2 - reintento: 0
+# 10 - 2 = 8, reintento=1
+# 8 - 2 = 6, reintento=2
+# 6 - 2 = 4, reintento=3
+# 4 - 2 = 2, reintento=4
+# 2 - 2 = 0, reintento=5
+
+# 9/2
+# 9 - 2 = 7
+# 7 - 2 = 5
+# 5 - 2 = 3
+# 3 - 2 = 1
+# 1 - 2 = -1 -> no contar reintento por ser negativo
+
+# 17/9
+# 17 - 9 = 8
+# 8 - 9 = -1 -> no contar
+
+
+# (-b +- sq(b^2-4*a*c)) / 2.a
+
 wrapper(main)

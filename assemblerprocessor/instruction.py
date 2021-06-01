@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from processor import *
+from validator import *
 import re
 
 MOV = 'mov'
@@ -36,11 +37,11 @@ class Mov(Instruccion):
     def validateParameters(self):
         if self.param1 not in ACCESIBLE_REGISTERS:
             raise Exception(INVALID_PARAMETER.format(self.param1))
-        elif self.param2 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
+        elif self.param2 not in ACCESIBLE_REGISTERS and not Validator.IsNumeric(self.param2):
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param2))
 
     def processInstruction(self, processor):
-        if self.param2.isnumeric():
+        if Validator.IsNumeric(self.param2):
             processor.setRegister(self.param1, int(self.param2))
         else:
             valueRegisterParam2 = processor.getRegister(self.param2)
@@ -58,12 +59,12 @@ class Add(Instruccion):
     def validateParameters(self):
         if self.param1 not in ACCESIBLE_REGISTERS:
             raise Exception(INVALID_PARAMETER.format(self.param1))
-        elif self.param2 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
+        elif self.param2 not in ACCESIBLE_REGISTERS and not Validator.IsNumeric(self.param2):
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param2))
 
     def processInstruction(self, processor):
         valueRegisterParam1 = processor.getRegister(self.param1)
-        if self.param2.isnumeric():
+        if Validator.IsNumeric(self.param2):
             sum = valueRegisterParam1 + int(self.param2)
         else:
             valueRegisterParam2 = processor.getRegister(self.param2)
@@ -80,18 +81,18 @@ class Cmp(Instruccion):
         self.param2 = param2
 
     def validateParameters(self):
-        if self.param1 not in ACCESIBLE_REGISTERS and not self.param1.isnumeric():
+        if self.param1 not in ACCESIBLE_REGISTERS and not Validator.IsNumeric(self.param1):
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param1))
-        elif self.param2 not in ACCESIBLE_REGISTERS and not self.param2.isnumeric():
+        elif self.param2 not in ACCESIBLE_REGISTERS and not Validator.IsNumeric(self.param2):
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param2))
 
     def processInstruction(self, processor):
         valueRegisterParam1 = 0
-        if self.param1.isnumeric():
+        if Validator.IsNumeric(self.param1):
             valueRegisterParam1 = int(self.param1)
         else:
             valueRegisterParam1 = processor.getRegister(self.param1)
-        if self.param2.isnumeric():
+        if Validator.IsNumeric(self.param2):
             if valueRegisterParam1 <= int(self.param2):
                 processor.setRegister(FLAG, 1)
             else:
@@ -190,7 +191,7 @@ class Push(Instruccion):
         processor.increaseIP()
 
     def validateParameters(self):
-        if self.param not in ACCESIBLE_REGISTERS and not self.param.isnumeric():
+        if self.param not in ACCESIBLE_REGISTERS and not Validator.IsNumeric(self.param):
             raise Exception(INVALID_PARAMETER_OR_NUMERIC.format(self.param))
 
     def toString(self):

@@ -132,8 +132,8 @@ class Assembler:
 
     def parseParameters(self, parameters):
         parametersList = []
-        oneParamRegex = '^(\w+)\s*$'
-        twoParamRegex = '^(\w+)\s*,\s*(\w+)\s*$'
+        oneParamRegex = '^([\w\-]+)\s*$'
+        twoParamRegex = '^([\w\-]+)\s*,\s*([\w\-]+)\s*$'
         oneParamMatch = re.search(oneParamRegex, parameters)
         if oneParamMatch:
             parametersList.append(oneParamMatch.group(1))
@@ -167,13 +167,13 @@ class Assembler:
         match = re.search('^(ret)', line)
         if match:
             return match and match.group(1) in VALID_INSTRUCCION
-        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_,\s]+)', line)
+        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_\-,\s]+)', line)
         return match and match.group(1) in VALID_INSTRUCCION
     
     def parseInstruction(self, line):
         if re.search('^(ret)', line):
             return ("ret","")
-        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_,\s]+)', line)
+        match = re.search('^(mov|add|cmp|inc|dec|jmp|jnz|push|pop|call)\s+([\w_,\-\s]+)', line)
         return (match.group(1), match.group(2))
 
     def cleanLine(self, line):
