@@ -12,7 +12,7 @@ IP = "ip"
 FLAG = "flag"
 
 ACCESIBLE_REGISTERS = [AX, BX, CX, DX]
-SLEEP_SECONDS = 0.01
+SLEEP_SECONDS = 0.2
 EMPTY_STACK = "Empty stack. Value not available"
 
 class Processor:

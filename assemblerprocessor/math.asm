@@ -39,25 +39,24 @@ loop_division:
     ret
     
 
-# por ahora retorna en dx, pero le falta refinar
+# retorna en ax
 sqrt:
     pop ax
     pop bx
     push ax
     dec bx
-    mov ax, 0
-    mov dx, 0
+    mov ax, -1
 loop_sqrt:
-    push dx
+    inc ax
+    push ax
     push bx
     push ax
     push ax
     call multiply
+    mov cx, ax
     pop bx
-    pop dx
-    inc dx
-    cmp ax, bx
-    inc ax
+    pop ax
+    cmp cx, bx
     jnz loop_sqrt
     ret
 
