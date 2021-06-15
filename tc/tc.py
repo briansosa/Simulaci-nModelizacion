@@ -12,8 +12,8 @@ import sys
 #	v*: vector o lista de tipo *
 #   c: instancia de una clase
 
-def distribucionExponencial(lamda):
-	return (-1/lamda) * np.log(1-np.random.random())
+def distribucionExponencial(tasa):
+	return (-1/tasa) * np.log(1-np.random.random())
 
 class Cliente:
 	def __init__(self, fTiempoLlegada):
@@ -54,12 +54,15 @@ class Sistema:
 	def eventoProximoCliente(self):
 		evento = EventoProximoCliente(self, self.tiempoGlobal + distribucionExponencial(self.Lambda))
 		print(f"creo evento proximo evento: {evento.tiempo}")
+		# llamar a "agregarEvento" y no retornar nada
 		return evento
+
 	
 	def ingresoCliente(self): 
 		cliente = Cliente(self.tiempoGlobal)
-                    	 ## Es el tiempo global?
 		self.cola.llegaCliente(cliente)
+		
+		# Esta linea es para encadenar la llegada de los proximos clientes
 		self.agregarEvento(self.eventoProximoCliente())
 		
 	def procesar(self):
@@ -76,7 +79,9 @@ class Sistema:
 					if proximoCliente is not None:
 						print("inicio atencion")
 						eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
-						self.agregarEvento(eventoFinAtencion)       
+						self.agregarEvento(eventoFinAtencion)      
+				if self.cola.cantClientes() == 3:
+					return 
 
 	
 class Servidor:
@@ -91,7 +96,7 @@ class Servidor:
 		self.estaOcupado = True
 		self.cliente = cCliente
 		cCliente.setTiempoInicioAtencion(fTiempoGlobal) 
-		eventoFinAtencion = EventoFinAtencion(fTiempoGlobal + self.mu, self) 
+		eventoFinAtencion = EventoFinAtencion(fTiempoGlobal + distribucionExponencial(self.mu), self) 
 		return eventoFinAtencion
 
 	def finAtencion(self,fTiempo):
@@ -104,12 +109,7 @@ class Cola:
 		self.cola = []
 
 	def cantClientes(self):
-        # return len(self.cola)
-		length = len(self.cola)
-		if length > 10:
-			sys.exit()
-		else:
-			return length
+		return len(self.cola)
 
 	def llegaCliente(self,cCliente):
 		self.cola.append(cCliente)
@@ -145,7 +145,6 @@ class EventoFinAtencion(Evento):
 
 	def procesar(self):
 		self.servidor.finAtencion(self.tiempo)
-                                ## es este tiempo??????????
 
 #evento correspondiente a la futura llegada del proximo cliente
 class EventoProximoCliente(Evento):
@@ -157,5 +156,5 @@ class EventoProximoCliente(Evento):
 		self.sistema.ingresoCliente()
 
 # se le pasa lambda y mu
-sistema = Sistema(0.5, [0.2, 0.2, 0.2])
+sistema = Sistema(0.5, [0.5])
 sistema.procesar()
