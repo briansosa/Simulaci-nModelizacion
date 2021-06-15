@@ -1,4 +1,7 @@
 import heapq
+import numpy as np
+import sys
+
 
 #comentarios:
 # A continuacion se detalla el esqueleto de la primera parte del trabajo de Teoria de Colas. 
@@ -9,157 +12,118 @@ import heapq
 #	v*: vector o lista de tipo *
 #   c: instancia de una clase
 
-
-# # DUDAS:
-# #  - "distribucionExponencial" donde se usa? tiene algo que ver relacionado al tiempo?
-# #  - como sabemos la cantidad de servidores a partir del mu y/o el lambda?
-# #  - como se saca el tiempo de llegada que recibe el cliente? Repaso de tiempos y a que se refiere cada uno
-# #  - Quien llama a "inicioAtencion" del servidor? "procesar" de sistema? si es asi, cual es el tiempo global?
-
-
-
 def distribucionExponencial(lamda):
-# implemetntacion de la practica 3
-
+	return (-1/lamda) * np.log(1-np.random.random())
 
 class Cliente:
 	def __init__(self, fTiempoLlegada):
-	# inicializa las variables y setea el tiempo de llegada del cliente
-        self.tiempoLlegada = fTiempoLlegada
+		self.tiempoLlegada = fTiempoLlegada
 
 	def setTiempoInicioAtencion(self,fTiempoInicioAtencion):
-	# setter del tiempo del inicio de atencion del cliente
-        self.tiempoInicioAtencion = fTiempoInicioAtencion
+		self.tiempoInicioAtencion = fTiempoInicioAtencion
 	
 	def setTiempoSalida(self, fTiempoSalida):
-	# setter del tiempo de salida del cliente
-        self.tiempoFinDeAtencion = fTiempoSalida
+		self.tiempoFinDeAtencion = fTiempoSalida
 		
 class Sistema:
-	def __init__(self, fTasaLlegadaClientes, fTasasAtencionServidores):
-	# inicializa: la tasa de llegada de clientes, el tiempo global
-        self.Lambda = fTasaLlegadaClientes
-        self.mu = fTasaAtencionServidor
-	# crea la cola de clientes
-        self.cola = Cola()
-	# crea la lista de servidores (llama al metodo creacionServidores)
-        self.servidores = self.creacionServidores()
-	# crea la bolsa de eventos
-        self.crearBolsaEventos()
+	def __init__(self, fTasaLlegadaClientes, vfTasasAtencionServidores):
+		self.Lambda = fTasaLlegadaClientes
+		self.listaDeMu = vfTasasAtencionServidores
+		self.cola = Cola()
+		self.servidores = self.creacionServidores()
+		self.eventos = []
+		self.crearBolsaEventos()
+		self.tiempoGlobal = 0
 
-    def crearBolsaEventos(self):
-        self.eventos = []
-        heapq.heapify(eventos)
+	def crearBolsaEventos(self):
+		heapq.heapify(self.eventos)
 
-    def agregarEvento(self, evento):
-        heapq.heappush(self.eventos, evento)
+	def agregarEvento(self, evento):
+		print(f"agrego evento con tiempo: {evento.tiempo}")
+		heapq.heappush(self.eventos, evento)
 
-    def proximoEvento(self):
-        return heapq.heappop(self.eventos)
+	def proximoEvento(self):
+		evento = heapq.heappop(self.eventos)
+		print(f"pop proximo evento: {evento.tiempo}")
+		return evento
 
 	def creacionServidores(self):
-	# crea la lista de servidores respetando la respectivas tasa de atención
+		listaServidores = [Servidor(mu) for mu in self.listaDeMu]
+		return listaServidores
 	
 	def eventoProximoCliente(self):
-	# genera un evento de tipo EventoProximoCliente 
+		evento = EventoProximoCliente(self, self.tiempoGlobal + distribucionExponencial(self.Lambda))
+		print(f"creo evento proximo evento: {evento.tiempo}")
+		return evento
 	
 	def ingresoCliente(self): 
-	# callback para la clase EventoProximoCliente.procesar
-	# corresponde a la llegada efectiva del cliente
-	# 1) crea el Cliente
-        cliente = Cliente(1/self.Lambda)
-                    ## De donde saco el tiempo de llegada del parametro????
-                    ## por ahora, 1 / lambda
-	# 2) agrega el cliente a la cola
-        self.cola.llegaCliente(cliente)
-	# 3) crea el nuevo evento de llegada del proximo cliente (llama a self.eventoProximoCliente())
-        eventoProximoCliente = self.eventoProximoCliente()
-	# 4) agrega el evento a la bolsa de eventos
-        self.agregarEvento(eventoProximoCliente)
+		cliente = Cliente(self.tiempoGlobal)
+                    	 ## Es el tiempo global?
+		self.cola.llegaCliente(cliente)
+		self.agregarEvento(self.eventoProximoCliente())
 		
 	def procesar(self):
-	# es el metodo más importante porque orquesta toda la simulacion 
-	# 1) crea el eventoProximoCliente del 1er. cliente
-        evento = EventoProximoCliente()
-        self.agregarEvento(evento)
-            ## aca se me mete en la bolsa de eventos?
-	# while (True):
-        while (True):
-	#	2) saca el proximo evento de la bolsa de eventos
-            proximoEvento = self.proximoEvento()
-    #	3) procesa el evento (via polimorfismo)
-            proximoEvento.procesar()
-	#	4) for s in self.servidores:
-            for servidor in self.servidores:
-			# 5) si el servidor esta desocupado y hay algun cliente en la cola
-                if not servidor.estaOcupado and len(self.cola.cantClientes):
-				# 6) desencolar el primer cliente de la cola
-                    proximoCliente = self.cola.proximoCliente()
-                    if proximoCliente is not None:
-				# 7) generar el evento de FinAtencion 
-                        eventoFinAtencion = EventoFinAtencion(proximoCliente.inicioAtencion, servidor)
-                                                            ## terminar de ver el parametro inicio
-				# 8) agregar a la bolsa de eventos el evento de FinAtencion
-                        self.agregarEvento(eventoFinAtencion)
-                        ## Preguntar si la siguiente linea va acá
-                        servidor.inicioAtencion(proximoCliente.inicioAtencion, proximoCliente)
-                                                ## terminar de ver este parametro
+		primerEvento = self.eventoProximoCliente()
+		self.agregarEvento(primerEvento)
+		while (True):
+			proximoEvento = self.proximoEvento()
+			self.tiempoGlobal = proximoEvento.tiempo
+			proximoEvento.procesar()
+			for servidor in self.servidores:
+				if not servidor.estaOcupado and self.cola.cantClientes():
+					print("voy a atender a un cliente")
+					proximoCliente = self.cola.proximoCliente()
+					if proximoCliente is not None:
+						print("inicio atencion")
+						eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
+						self.agregarEvento(eventoFinAtencion)       
+
 	
 class Servidor:
 	def __init__(self,fTasaAtencionServidor):
-	# inicializa variables
-        self.mu = fTasaAtencionServidor
-        self.estaOcupado = False
+		self.mu = fTasaAtencionServidor
+		self.estaOcupado = False
 		
 	def estaOcupado(self):
-	# flag: devuelve "true" si el servidor esta ocupado, y "false" si no
-        return self.estaOcupado
+		return self.estaOcupado
 		
 	def inicioAtencion(self, fTiempoGlobal,cCliente):
-	# setea el servidor en "ocupado"
-        self.estaOcupado = True
-	# setea el tiempo de inicio atencion del cliente
-        self.cliente = cCliente
-        cCliente.setTiempoInicioAtencion(fTiempoGlobal) 
-                                    ## Cual es este tiempo?
-	# crea y devuelve el EventoFinAtencion
-        eventoFinAtencion = eventoFinAtencion(fTiempoGlobal + (1/self.mu), self) 
-                                                ## creo q ta mal el param
-        return eventoFinAtencion
+		self.estaOcupado = True
+		self.cliente = cCliente
+		cCliente.setTiempoInicioAtencion(fTiempoGlobal) 
+		eventoFinAtencion = EventoFinAtencion(fTiempoGlobal + self.mu, self) 
+		return eventoFinAtencion
 
 	def finAtencion(self,fTiempo):
-	# callback para EventoFinAtencion.procesar
-	# setea el tiempo de salida del cliente
-        self.cliente.setTiempoSalida(fTiempo)
-        self.cliente = None
-	# setea la servidor es desocupado
-        self.estaOcupado = False
+		self.cliente.setTiempoSalida(fTiempo)
+		self.cliente = None
+		self.estaOcupado = False
 
 class Cola:
 	def __init__(self):
-	# crea la lista que representara la cola de clientes
-	self.cola = []
+		self.cola = []
 
 	def cantClientes(self):
-	# devuelve la cantidad de clientes que hay en la cola
-        return len(self.cola)
+        # return len(self.cola)
+		length = len(self.cola)
+		if length > 10:
+			sys.exit()
+		else:
+			return length
 
 	def llegaCliente(self,cCliente):
-	# agregar el cliente a la cola
-        self.cola.append(cCliente)
+		self.cola.append(cCliente)
 		
 	def proximoCliente(self):
-	# devuelve el primer cliente de la cola (si hay alguno)
-        if self.cantClientes() != 0:
-            return self.cola.pop()
-        return None
+		if self.cantClientes() != 0:
+			return self.cola.pop()
+		return None
 
 
 # clase base de los eventos 	
 class Evento:
 	def __init__(self, fTiempo):
-	# setea el tiempo de ocurrencia futura del evento
-        self.tiempo = fTiempo
+		self.tiempo = fTiempo
 		
 	# metodo "lower than" para comparar 2 eventos
 	def __lt__(self, other):
@@ -175,31 +139,23 @@ class Evento:
 
 #evento correspondiente a la futura finalizacion de atencion de un cliente por parte de un servidor
 class EventoFinAtencion(Evento):
-	
 	def __init__(self, fTiempo, cServidor):
-	#llama al constructor de la superclase
-        super(fTiempo)
-	#setea el servidor
-        self.servidor = cServidor
+		super().__init__(fTiempo)
+		self.servidor = cServidor
 
 	def procesar(self):
-	# llama a servidor.finAtencion
-        self.servidor.finAtencion(self.tiempo)
+		self.servidor.finAtencion(self.tiempo)
                                 ## es este tiempo??????????
 
 #evento correspondiente a la futura llegada del proximo cliente
 class EventoProximoCliente(Evento):
-	
 	def __init__(self, cSistema, fTiempo):
-	#llama al constructor de la susperclase
-        super(fTiempo)
-	#setea el sistema (notar que recibe el sistema como parametro)
-        self.sistema = cSistema
-	
+		super().__init__(fTiempo)
+		self.sistema = cSistema
+
 	def procesar(self):
-	# llama al callback sistema.ingresoCliente()
-        self.sistema.ingresoCliente()
+		self.sistema.ingresoCliente()
 
 # se le pasa lambda y mu
-sistema = Sistema(...,...)
+sistema = Sistema(0.5, [0.2, 0.2, 0.2])
 sistema.procesar()
