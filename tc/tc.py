@@ -1,7 +1,7 @@
 import heapq
 import numpy as np
 import sys
-
+from estadistica import *
 
 #comentarios:
 # A continuacion se detalla el esqueleto de la primera parte del trabajo de Teoria de Colas. 
@@ -18,6 +18,8 @@ def distribucionExponencial(tasa):
 class Cliente:
 	def __init__(self, fTiempoLlegada):
 		self.tiempoLlegada = fTiempoLlegada
+		self.tiempoFinDeAtencion = 0
+		self.tiempoInicioAtencion = 0
 
 	def setTiempoInicioAtencion(self,fTiempoInicioAtencion):
 		self.tiempoInicioAtencion = fTiempoInicioAtencion
@@ -34,6 +36,7 @@ class Sistema:
 		self.eventos = []
 		self.crearBolsaEventos()
 		self.tiempoGlobal = 0
+		# self.estadistica = estadistica
 
 	def crearBolsaEventos(self):
 		heapq.heapify(self.eventos)
@@ -53,22 +56,17 @@ class Sistema:
 	
 	def eventoProximoCliente(self):
 		evento = EventoProximoCliente(self, self.tiempoGlobal + distribucionExponencial(self.Lambda))
-		print(f"creo evento proximo evento: {evento.tiempo}")
-		# llamar a "agregarEvento" y no retornar nada
-		return evento
+		self.agregarEvento(evento)
 
-	
 	def ingresoCliente(self): 
 		cliente = Cliente(self.tiempoGlobal)
 		self.cola.llegaCliente(cliente)
-		
-		# Esta linea es para encadenar la llegada de los proximos clientes
-		self.agregarEvento(self.eventoProximoCliente())
+		self.eventoProximoCliente()
 		
 	def procesar(self):
-		primerEvento = self.eventoProximoCliente()
-		self.agregarEvento(primerEvento)
+		self.eventoProximoCliente()
 		while (True):
+			Estadistica.cantMediciones += 1
 			proximoEvento = self.proximoEvento()
 			self.tiempoGlobal = proximoEvento.tiempo
 			proximoEvento.procesar()
@@ -79,8 +77,10 @@ class Sistema:
 					if proximoCliente is not None:
 						print("inicio atencion")
 						eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
-						self.agregarEvento(eventoFinAtencion)      
-				if self.cola.cantClientes() == 3:
+						self.agregarEvento(eventoFinAtencion)  
+						Estadistica.tiempoTotalClientesEnCola += proximoCliente.tiempoInicioAtencion - proximoCliente.tiempoLlegada
+						Estadistica.cantClientesQueEsperaron += 1    
+				if self.cola.cantClientes() == 37:
 					return 
 
 	
@@ -101,6 +101,8 @@ class Servidor:
 
 	def finAtencion(self,fTiempo):
 		self.cliente.setTiempoSalida(fTiempo)
+		Estadistica.tiempoTotalClientesEnSistema += self.cliente.tiempoFinDeAtencion - self.cliente.tiempoLlegada
+		Estadistica.cantClientesAtendidos += 1
 		self.cliente = None
 		self.estaOcupado = False
 
@@ -155,6 +157,4 @@ class EventoProximoCliente(Evento):
 	def procesar(self):
 		self.sistema.ingresoCliente()
 
-# se le pasa lambda y mu
-sistema = Sistema(0.5, [0.5])
-sistema.procesar()
+
