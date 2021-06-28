@@ -19,22 +19,6 @@ class Estadistica:
 	cantClientesQueEsperaron = 0
 	cantMediciones = 0
 
-	# def __init__(self):
-	# 	#acumulador del tiempo total que pasaron los clientes en el sistema
-	# 	self.tiempoTotalClientesEnSistema = 0
-
-	# 	#acumulador del tiempo total que pasaron los clientes en la cola
-	# 	self.tiempoTotalClientesEnCola = 0
-
-	# 	#acumulador de clientes que fueron atendidos
-	# 	self.cantClientesAtendidos = 0
-
-	# 	#acumulador de clientes que esperaron en la cola
-	# 	self.cantClientesQueEsperaron = 0
-
-    #     # n?
-	# 	self.cantMediciones = 0
-
     #W: tiempo promedio que paso un cliente en el sistema
 	@classmethod
 	def W(cls):

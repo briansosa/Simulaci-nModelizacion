@@ -41,7 +41,7 @@ def actualizarEstadoServidores(screen,sistema):
 	
 
 def actualizarVariablesEstadistica(screen, sistema):
-	screen.addstr(7,0,'Cantidad de clientes en espera (en la cola): {}'.format(sistema.cola.cantClientes()))
+	screen.addstr(7,0,'Cantidad de clientes en espera (en la cola): {:02d}'.format(sistema.cola.cantClientes()))
 	screen.addstr(8,0,'Cantidad de mediciones: {}'.format(Estadistica.cantMediciones))
 	screen.addstr(9,0,'Tiempo global: {}'.format(sistema.tiempoGlobal))
 	screen.addstr(10,0,'L: {}'.format(Estadistica.L(sistema)))
