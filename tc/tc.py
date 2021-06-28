@@ -36,18 +36,20 @@ class Sistema:
 		self.eventos = []
 		self.crearBolsaEventos()
 		self.tiempoGlobal = 0
+		self.eventoProximoCliente()
+
 		# self.estadistica = estadistica
 
 	def crearBolsaEventos(self):
 		heapq.heapify(self.eventos)
 
 	def agregarEvento(self, evento):
-		print(f"agrego evento con tiempo: {evento.tiempo}")
+		# print(f"agrego evento con tiempo: {evento.tiempo}")
 		heapq.heappush(self.eventos, evento)
 
 	def proximoEvento(self):
 		evento = heapq.heappop(self.eventos)
-		print(f"pop proximo evento: {evento.tiempo}")
+		# print(f"pop proximo evento: {evento.tiempo}")
 		return evento
 
 	def creacionServidores(self):
@@ -64,24 +66,23 @@ class Sistema:
 		self.eventoProximoCliente()
 		
 	def procesar(self):
-		self.eventoProximoCliente()
-		while (True):
-			Estadistica.cantMediciones += 1
-			proximoEvento = self.proximoEvento()
-			self.tiempoGlobal = proximoEvento.tiempo
-			proximoEvento.procesar()
-			for servidor in self.servidores:
-				if not servidor.estaOcupado and self.cola.cantClientes():
-					print("voy a atender a un cliente")
-					proximoCliente = self.cola.proximoCliente()
-					if proximoCliente is not None:
-						print("inicio atencion")
-						eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
-						self.agregarEvento(eventoFinAtencion)  
-						Estadistica.tiempoTotalClientesEnCola += proximoCliente.tiempoInicioAtencion - proximoCliente.tiempoLlegada
-						Estadistica.cantClientesQueEsperaron += 1    
-				if self.cola.cantClientes() == 37:
-					return 
+		# while (True):
+		Estadistica.cantMediciones += 1
+		proximoEvento = self.proximoEvento()
+		self.tiempoGlobal = proximoEvento.tiempo
+		proximoEvento.procesar()
+		for servidor in self.servidores:
+			if not servidor.estaOcupado and self.cola.cantClientes():
+				# print("voy a atender a un cliente")
+				proximoCliente = self.cola.proximoCliente()
+				if proximoCliente is not None:
+					# print("inicio atencion")
+					eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
+					self.agregarEvento(eventoFinAtencion)  
+					Estadistica.tiempoTotalClientesEnCola += proximoCliente.tiempoInicioAtencion - proximoCliente.tiempoLlegada
+					Estadistica.cantClientesQueEsperaron += 1    
+			if self.cola.cantClientes() == 37:
+				return 
 
 	
 class Servidor:

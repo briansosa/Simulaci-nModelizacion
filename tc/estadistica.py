@@ -38,11 +38,16 @@ class Estadistica:
     #W: tiempo promedio que paso un cliente en el sistema
 	@classmethod
 	def W(cls):
+		if (cls.cantClientesAtendidos == 0):
+			cls.cantClientesAtendidos = 1
+
 		return cls.tiempoTotalClientesEnSistema / cls.cantClientesAtendidos
 
 	#Wq: tiempo promedio que paso un cliente en la cola
 	@classmethod
 	def Wq(cls):
+		if (cls.cantClientesQueEsperaron == 0):
+			cls.cantClientesQueEsperaron = 1
 		return cls.tiempoTotalClientesEnCola / cls.cantClientesQueEsperaron
 
 
