@@ -18,9 +18,7 @@ def iniciar(screen):
 	i = 0
 	while(not terminar):
 		screen.nodelay(True)
-
 		sistema.procesar()
-
 		actualizarEstadoServidores(screen, sistema)
 
 		time.sleep(0.003)
