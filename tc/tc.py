@@ -38,18 +38,14 @@ class Sistema:
 		self.tiempoGlobal = 0
 		self.eventoProximoCliente()
 
-		# self.estadistica = estadistica
-
 	def crearBolsaEventos(self):
 		heapq.heapify(self.eventos)
 
 	def agregarEvento(self, evento):
-		# print(f"agrego evento con tiempo: {evento.tiempo}")
 		heapq.heappush(self.eventos, evento)
 
 	def proximoEvento(self):
 		evento = heapq.heappop(self.eventos)
-		# print(f"pop proximo evento: {evento.tiempo}")
 		return evento
 
 	def creacionServidores(self):
@@ -66,24 +62,21 @@ class Sistema:
 		self.eventoProximoCliente()
 		
 	def procesar(self):
-		# while (True):
 		Estadistica.cantMediciones += 1
 		proximoEvento = self.proximoEvento()
 		self.tiempoGlobal = proximoEvento.tiempo
 		proximoEvento.procesar()
+		cantClientesCola = self.cola.cantClientes()
+		Estadistica.cantTotalClientesCola += cantClientesCola
+		Estadistica.cantTotalClientesSistema += cantClientesCola
 		for servidor in self.servidores:
-			if not servidor.estaOcupado and self.cola.cantClientes():
-				# print("voy a atender a un cliente")
+			if servidor.estaOcupado:
+				Estadistica.cantTotalClientesSistema += 1 
+			if not servidor.estaOcupado and cantClientesCola:
 				proximoCliente = self.cola.proximoCliente()
 				if proximoCliente is not None:
-					# print("inicio atencion")
 					eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
 					self.agregarEvento(eventoFinAtencion)  
-					Estadistica.tiempoTotalClientesEnCola += proximoCliente.tiempoInicioAtencion - proximoCliente.tiempoLlegada
-					Estadistica.cantClientesQueEsperaron += 1    
-			if self.cola.cantClientes() == 37:
-				return 
-
 	
 class Servidor:
 	def __init__(self,fTasaAtencionServidor):
@@ -93,11 +86,13 @@ class Servidor:
 	def estaOcupado(self):
 		return self.estaOcupado
 		
-	def inicioAtencion(self, fTiempoGlobal,cCliente):
+	def inicioAtencion(self, fTiempoGlobal, cCliente):
 		self.estaOcupado = True
 		self.cliente = cCliente
 		cCliente.setTiempoInicioAtencion(fTiempoGlobal) 
-		eventoFinAtencion = EventoFinAtencion(fTiempoGlobal + distribucionExponencial(self.mu), self) 
+		eventoFinAtencion = EventoFinAtencion(fTiempoGlobal + distribucionExponencial(self.mu), self)
+		Estadistica.tiempoTotalClientesEnCola += cCliente.tiempoInicioAtencion - cCliente.tiempoLlegada
+		Estadistica.cantClientesQueEsperaron += 1 
 		return eventoFinAtencion
 
 	def finAtencion(self,fTiempo):

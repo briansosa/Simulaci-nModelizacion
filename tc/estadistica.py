@@ -12,12 +12,14 @@ import math
 #   c: instancia de una clase
 
 class Estadistica:
-
 	tiempoTotalClientesEnSistema = 0
 	tiempoTotalClientesEnCola = 0
 	cantClientesAtendidos = 0
 	cantClientesQueEsperaron = 0
 	cantMediciones = 0
+
+	cantTotalClientesSistema = 0
+	cantTotalClientesCola = 0
 
     #W: tiempo promedio que paso un cliente en el sistema
 	@classmethod
@@ -35,15 +37,16 @@ class Estadistica:
 		return cls.tiempoTotalClientesEnCola / cls.cantClientesQueEsperaron
 
 
-	# Las funciones L y Lq las pusimos con el Lambda para ver el resultado aproximado y poder con la visualizacion
-	# Ver con que se reemplaza el lambda en cada caso.
-
 	#L: promedio de clientes en el sistema
 	@classmethod
-	def L(cls, sistema):
-		return sistema.Lambda * cls.W()
+	def L(cls):
+		if (cls.cantMediciones == 0):
+			cls.cantMediciones = 1
+		return cls.cantTotalClientesSistema/cls.cantMediciones
 
 	#Lq: promedio de clientes en la cola
 	@classmethod
-	def Lq(cls, sistema):
-		return sistema.Lambda * cls.Wq()
+	def Lq(cls):
+		if (cls.cantMediciones == 0):
+			cls.cantMediciones = 1
+		return cls.cantTotalClientesCola/cls.cantMediciones
