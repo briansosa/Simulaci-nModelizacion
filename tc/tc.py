@@ -66,17 +66,18 @@ class Sistema:
 		proximoEvento = self.proximoEvento()
 		self.tiempoGlobal = proximoEvento.tiempo
 		proximoEvento.procesar()
-		cantClientesCola = self.cola.cantClientes()
-		Estadistica.cantTotalClientesCola += cantClientesCola
-		Estadistica.cantTotalClientesSistema += cantClientesCola
+		
 		for servidor in self.servidores:
 			if servidor.estaOcupado:
 				Estadistica.cantTotalClientesSistema += 1 
-			if not servidor.estaOcupado and cantClientesCola:
+			if not servidor.estaOcupado and self.cola.cantClientes():
 				proximoCliente = self.cola.proximoCliente()
 				if proximoCliente is not None:
 					eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
 					self.agregarEvento(eventoFinAtencion)  
+		cantClientesCola = self.cola.cantClientes()
+		Estadistica.cantTotalClientesCola += cantClientesCola
+		Estadistica.cantTotalClientesSistema += cantClientesCola
 	
 class Servidor:
 	def __init__(self,fTasaAtencionServidor):
