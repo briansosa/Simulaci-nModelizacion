@@ -73,8 +73,12 @@ class Sistema:
 			if not servidor.estaOcupado and self.cola.cantClientes():
 				proximoCliente = self.cola.proximoCliente()
 				if proximoCliente is not None:
+					# Este if es para solucionar el caso de que no se contabiliza
+					# los clientes cuando no hay nadie en el sistema
+					if (self.cola.cantClientes() != 0):
+						Estadistica.cantTotalClientesSistema += 1 
 					eventoFinAtencion = servidor.inicioAtencion(self.tiempoGlobal, proximoCliente)
-					self.agregarEvento(eventoFinAtencion)  
+					self.agregarEvento(eventoFinAtencion) 
 		cantClientesCola = self.cola.cantClientes()
 		Estadistica.cantTotalClientesCola += cantClientesCola
 		Estadistica.cantTotalClientesSistema += cantClientesCola
